@@ -1,0 +1,1571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Vitor Tavares — Portfolio journey</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;family=Source+Sans+3:wght@400;600&amp;display=swap">
+<style>
+body{margin:0;background:#EFE9DD}
+/* Motion tokens: four durations, four curves, fixed amplitudes. No other values are used below. */
+:root{--duration-micro:160ms;--duration-short:280ms;--duration-medium:520ms;--duration-cinematic:1200ms;--duration-stagger:40ms;--ease-standard:cubic-bezier(.2,0,0,1);--ease-enter:cubic-bezier(.22,.61,.36,1);--ease-exit:cubic-bezier(.55,.06,.68,.19);--ease-cinematic:cubic-bezier(.22,1,.36,1);--amp-wind:24px;--amp-nudge:4px;--vt-top:0px;--vt-bottom:0px}
+.vt{--font-display:'EB Garamond',Garamond,'Iowan Old Style',Georgia,serif;--font-sans:'Source Sans 3','Source Sans Pro','Segoe UI',system-ui,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;timeline-scope:--paper}
+/* Environments: Paper and Night are declared per section, never toggled */
+.vt,.env-paper{--bg:#EFE9DD;--bg-surface:#F7F3EB;--bg-elevated:#FDFBF7;--ink:#2A2420;--ink-2:#6B6055;--ink-3:#9A9183;--terracotta:#B86B4A;--terra-deep:#9C5A3D;--terra-wash:rgba(184,107,74,.10);--horizon:#6F8D9E;--hz-wash:rgba(111,141,158,.10);--rule:#D9D1C5;--rule-sub:#E5DED3;--focus:#9C5A3D;--petal:#E4B6AE;--nav-ground:rgba(239,233,221,.86);color-scheme:light}
+.env-night{--bg:#1C1F25;--bg-surface:#242830;--bg-elevated:#2C3139;--ink:#E6E0D6;--ink-2:#9A9088;--ink-3:#6B6258;--terracotta:#D0845E;--terra-deep:#C07750;--terra-wash:rgba(208,132,94,.10);--horizon:#8AAABB;--hz-wash:rgba(138,170,187,.10);--rule:#333840;--rule-sub:#2A2F36;--focus:#D0845E;--petal:#C99A94;--nav-ground:rgba(28,31,37,.86);--scrim:linear-gradient(to right,rgba(28,31,37,.4) 0%,rgba(28,31,37,.22) 30%,rgba(28,31,37,0) 58%);color-scheme:dark}
+.env-paper,.env-night{color:var(--ink)}
+.vt ::selection{background:var(--terra-wash)}
+.vt a{color:inherit}
+.vt :focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.t-overline{font-family:var(--font-mono);font-weight:500;font-size:.6875rem;line-height:1.4;letter-spacing:.12em;text-transform:uppercase}
+.t-label{font-family:var(--font-sans);font-weight:600;font-size:.875rem;line-height:1;letter-spacing:.06em;text-transform:uppercase}
+.t-meta{font-family:var(--font-mono);font-weight:400;font-size:.875rem;line-height:1.5}
+.t-display1{font-family:var(--font-display);font-weight:400;font-size:3.052rem;line-height:1.05;letter-spacing:-.01em}
+.t-display2{font-family:var(--font-display);font-weight:400;font-size:2.441rem;line-height:1.15;text-wrap:balance}
+.t-title1{font-family:var(--font-display);font-weight:500;font-size:1.953rem;line-height:1.1;letter-spacing:.06em;text-transform:uppercase}
+.t-title2{font-family:var(--font-display);font-weight:500;font-size:1.563rem;line-height:1.25}
+.t-title3{font-family:var(--font-display);font-weight:500;font-size:1.25rem;line-height:1.3}
+.t-quote{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:1.563rem;line-height:1.4;text-wrap:balance}
+.t-lead{font-family:var(--font-sans);font-weight:400;font-size:1.25rem;line-height:1.5;text-wrap:pretty}
+.t-body{font-family:var(--font-sans);font-weight:400;font-size:1rem;line-height:1.65;text-wrap:pretty}
+.t-bodysm{font-family:var(--font-sans);font-weight:400;font-size:.875rem;line-height:1.55;text-wrap:pretty}
+.caps{text-transform:uppercase;letter-spacing:.06em}
+.skip{position:absolute;left:16px;top:-80px;z-index:200;padding:12px 16px;background:var(--bg-elevated);border:1px solid var(--ink);text-decoration:none}
+.skip:focus{top:16px}
+/* WIND · arrow nudge, micro, in the arrow's own direction */
+.arrow{width:16px;height:16px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.25;stroke-linecap:square;transition:transform var(--duration-micro) var(--ease-enter)}
+/* Navigation */
+/* MACHINE · the bar takes the ground and colour of the section under it, short */
+.nav{background:var(--nav-ground);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);view-transition-name:site-nav;transition:background-color var(--duration-short) var(--ease-standard),color var(--duration-short) var(--ease-standard),border-color var(--duration-short) var(--ease-standard)}
+.nav-link{position:relative;display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
+/* WIND · underline draws left to right, retracts right to left, micro */
+.nav-link::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:1px;background:var(--terracotta);transform:scaleX(0);transform-origin:left;transition:transform var(--duration-micro) var(--ease-exit)}
+.nav-link:hover::after,.nav-link:focus-visible::after{transform:scaleX(1);transition-timing-function:var(--ease-enter)}
+.nav-link.is-current::after{height:2px;transform:scaleX(1);transition-duration:var(--duration-short)}
+.brand{text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+/* Hero */
+.hero{background:var(--bg)}
+.hero-stage{background:var(--bg) url(./assets/98cd6a44b62f5ea65a0e7c3d0a050f99.jpg) center/cover no-repeat;transform-origin:50% 42%;will-change:transform}
+.hero-scrim{background:var(--scrim)}
+.cta{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:44px;text-decoration:none}
+.cta::after{content:"";position:absolute;left:0;right:26px;bottom:8px;height:1px;background:var(--terracotta)}
+.cta:hover .arrow,.entry:hover .entry-cta .arrow,.entry:focus-visible .entry-cta .arrow,.ret-next:hover .arrow{transform:translateX(var(--amp-nudge))}
+.back:hover .arrow,.ret-back:hover .arrow{transform:translateX(calc(var(--amp-nudge) * -1))}
+.cue:hover .arrow{transform:translateY(var(--amp-nudge))}
+.foot-link:hover .arrow{transform:translate(3px,-3px)}
+.scene-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;background:none;border:0;color:var(--ink);cursor:pointer}
+.scene-btn svg{width:12px;height:12px;fill:currentColor}
+.cue{display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none}
+/* Paper */
+.petal{position:absolute;left:0;width:22px;height:16px;opacity:0;fill:var(--petal)}
+.petal:nth-child(1){top:14px;--tx:46vw;--ty:34px;--rot:190deg}
+.petal:nth-child(2){top:40px;--tx:62vw;--ty:52px;--rot:240deg;animation-duration:1400ms!important;animation-delay:120ms!important}
+.petal:nth-child(3){top:6px;--tx:38vw;--ty:60px;--rot:150deg;animation-duration:900ms!important;animation-delay:220ms!important}
+.petal:nth-child(4){top:56px;--tx:70vw;--ty:28px;--rot:280deg;animation-duration:1300ms!important;animation-delay:300ms!important}
+.petal:nth-child(5){top:28px;--tx:54vw;--ty:44px;--rot:210deg;animation-duration:1000ms!important;animation-delay:420ms!important}
+.draw-rule{display:block;height:1px;background:var(--rule);transform-origin:left}
+/* Drafting table entries */
+.entry{cursor:pointer}
+.entry-figure{position:relative}
+.tick{position:absolute;width:12px;height:12px;border-color:var(--ink-3);border-style:solid;border-width:0}
+.tick.tl{left:0;top:0;border-top-width:1px;border-left-width:1px}
+.tick.tr{right:0;top:0;border-top-width:1px;border-right-width:1px}
+.tick.bl{left:0;bottom:0;border-bottom-width:1px;border-left-width:1px}
+.tick.br{right:0;bottom:0;border-bottom-width:1px;border-right-width:1px}
+.sheet-grid{--sheet:var(--bg-surface);background-color:var(--bg-surface);background-image:linear-gradient(var(--rule-sub) 1px,transparent 1px),linear-gradient(90deg,var(--rule-sub) 1px,transparent 1px);background-size:24px 24px;background-position:-1px -1px}
+.sheet-grid.is-elevated{--sheet:var(--bg-elevated);background-color:var(--bg-elevated)}
+/* DRAFT · the preview unrolls by a horizontal mask and the rule is swept, medium; the entry itself never moves */
+.entry-sheet{position:absolute;inset:0;border:1px solid var(--rule);overflow:hidden;clip-path:inset(0 100% 0 0);transition:clip-path var(--duration-medium) var(--ease-standard)}
+.entry-sheet-inner{position:absolute;inset:0}
+.entry:hover .entry-sheet,.entry:focus-visible .entry-sheet,.entry.is-open .entry-sheet,.entry.is-current .entry-sheet{clip-path:inset(0 0 0 0)}
+.entry.is-open .entry-sheet{transition:none}
+/* Selected Work rail: three sheets side by side, native horizontal scroll, the next sheet always in sight */
+.rail{display:flex;gap:24px;list-style:none;margin:0;padding:0 max(64px,calc((100% - 1312px) / 2));scroll-padding-inline:max(64px,calc((100% - 1312px) / 2));overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;outline:none}
+.rail::-webkit-scrollbar{display:none}
+.slide{flex:0 0 min(1080px,84%);box-sizing:border-box;padding-left:24px;border-left:1px solid var(--rule);scroll-snap-align:start}
+/* The last stop of the journey is a door to the archive, not a fourth project */
+.slide.slide-exit{flex-basis:min(480px,70%)}
+.exit:hover .rule-ink,.exit:focus-visible .rule-ink{transform:scaleX(1)}
+.exit:hover .arrow,.exit:focus-visible .arrow{transform:translateX(var(--amp-nudge));color:var(--terracotta)}
+.exit:focus-visible{outline-offset:12px}
+/* Selected Work is a pinned horizontal journey: the page keeps scrolling and this part travels sideways. The scroll position sets the track (see syncRail); the wheel is never intercepted. Narrow or short windows, touch layouts and reduced motion keep the native horizontal rail above. */
+@media (min-width:1024px) and (min-height:760px) and (prefers-reduced-motion:no-preference){
+.work{padding:0!important}
+.pin{position:sticky;top:0;box-sizing:border-box;height:max(760px,min(100vh,62.5vw));padding-top:72px;justify-content:center;gap:40px!important;overflow:clip}
+.pin .rail{overflow:visible;scroll-snap-type:none;scroll-behavior:auto;will-change:transform}
+}
+.entry:focus-visible{outline-offset:12px}
+.rule-line{position:relative;display:block;flex-grow:1;height:1px;background:var(--rule);transform-origin:left}
+.rule-ink{position:absolute;left:0;right:0;top:0;height:1px;background:var(--terracotta);transform:scaleX(0);transform-origin:left;transition:transform var(--duration-medium) var(--ease-standard)}
+.entry:hover .rule-ink,.entry:focus-visible .rule-ink{transform:scaleX(1)}
+.entry:hover .entry-cta .arrow,.entry:focus-visible .entry-cta .arrow{color:var(--terracotta)}
+/* MACHINE · pressed and open are states, set at once */
+.entry:active .rule-ink,.entry.is-open .rule-ink{transform:scaleX(1);height:2px;top:-.5px}
+.entry:active .rule-ink{transition:none}
+/* Diagrams */
+.dg{display:block;width:100%;height:100%}
+.dg .n{fill:var(--sheet);stroke:var(--ink);stroke-width:1.25;vector-effect:non-scaling-stroke}
+.dg .n.is-planned{fill:none;stroke:var(--ink-2);stroke-dasharray:5 4}
+.dg .e{fill:none;stroke:var(--horizon);stroke-width:1.5;stroke-linecap:square;vector-effect:non-scaling-stroke}
+.dg .e.is-planned{stroke-dasharray:6 5}
+.dg .lead{fill:none;stroke:var(--horizon);stroke-width:1;vector-effect:non-scaling-stroke}
+.dg .lbl{font-family:var(--font-mono);font-size:14px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;fill:var(--ink)}
+.dg .sub,.dg .ann{font-family:var(--font-mono);font-size:12px;fill:var(--ink-2)}
+.dg .tb{fill:var(--sheet);stroke:var(--ink);stroke-width:1;vector-effect:non-scaling-stroke}
+.dg .tb-t{font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;fill:var(--ink)}
+.dg .tb-s{font-family:var(--font-mono);font-size:11px;fill:var(--ink-2)}
+/* Night: ink-2 fails on bg-elevated (4.2:1), so the open sheet annotates in ink */
+.env-night .is-elevated .dg .sub,.env-night .is-elevated .dg .ann,.env-night .is-elevated .dg .tb-s{fill:var(--ink)}
+/* Project detail */
+.back,.ret{text-decoration:none;display:inline-flex;align-items:center;gap:10px;min-height:44px}
+.ret{flex-direction:column;align-items:flex-start;gap:12px;padding:8px 0}
+.ret-next{align-items:flex-end;text-align:right}
+.ret .ret-title{display:flex;align-items:center;gap:14px}
+.ret:hover .ret-title{text-decoration:underline;text-decoration-color:var(--terracotta);text-decoration-thickness:1px;text-underline-offset:8px}
+.chip{display:inline-flex;align-items:center}
+.chip+.chip::before{content:"·";margin:0 12px;color:var(--ink-2)}
+.sec-row{position:relative}
+.sec-row::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--rule-sub);transform-origin:left}
+/* MACHINE · reserved for the Archive, Capabilities and Evidence: the control answers in micro, the content in short, in place */
+.m-control{transition:color var(--duration-micro) var(--ease-standard),background-color var(--duration-micro) var(--ease-standard),border-color var(--duration-micro) var(--ease-standard)}
+.m-disclosure{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--duration-short) var(--ease-standard)}
+.m-disclosure.is-open{grid-template-rows:1fr}
+.m-disclosure>*{min-height:0;overflow:hidden;visibility:hidden;transition:visibility 0s linear var(--duration-short)}
+.m-disclosure.is-open>*{visibility:visible;transition-delay:0s}
+.m-results{transition:opacity var(--duration-short) var(--ease-standard)}
+.m-results.is-updating{opacity:0;transition:none}
+/* Material cues: one per section kind */
+.ruler{height:12px;background:repeating-linear-gradient(90deg,var(--ink-3) 0 1px,transparent 1px 40px) left top / 100% 12px no-repeat,repeating-linear-gradient(90deg,var(--ink-3) 0 1px,transparent 1px 8px) left top / 100% 6px no-repeat}
+.horizon-sky{background-color:var(--bg);background-image:linear-gradient(var(--hz-wash),var(--hz-wash))}
+.horizon-line{display:block;height:1px;background:var(--horizon)}
+/* Status marks: a shape and a word, never colour alone */
+.mark{display:inline-block;flex-shrink:0;width:8px;height:8px;box-sizing:border-box;border:1px solid currentColor}
+.mark.is-confirmed{background:currentColor}
+.mark.is-inferred{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.mark.is-open{border-radius:50%}
+.glyph{width:16px;height:16px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.25}
+/* Capability rows: a table-of-contents line, opened in place */
+.cap-item{border-bottom:1px solid var(--rule)}
+.cap{position:relative;display:grid;width:100%;box-sizing:border-box;padding:20px 0;margin:0;background:none;border:0;border-radius:0;color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:background-color var(--duration-micro) var(--ease-standard)}
+.cap:hover,.cap:focus-visible,.cap[aria-expanded="true"]{background-color:var(--terra-wash)}
+.cap::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--terracotta);transform:scaleX(0);transform-origin:left;transition:transform var(--duration-medium) var(--ease-standard)}
+.cap:hover::after,.cap:focus-visible::after{transform:scaleX(1)}
+.cap:hover .arrow,.cap-link:hover .arrow,.arow:hover .arrow{transform:translateX(var(--amp-nudge))}
+.cap-link{display:inline-flex;align-items:center;gap:10px;min-height:44px;text-decoration:underline;text-decoration-color:var(--terracotta);text-underline-offset:6px}
+/* Evidence record: ink rule, mono header, glyph */
+.rec{border-top:1px solid var(--ink);padding-top:12px;display:flex;flex-direction:column;gap:10px}
+.rec-facts{margin:0;display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:16px;row-gap:4px}
+.rec-facts dd{margin:0}
+.ref{color:var(--ink-2);white-space:nowrap}
+/* Archive: filters are bracketed words; pressed is reversed */
+.flt{display:inline-flex;align-items:center;min-height:44px;padding:0;background:none;border:0;color:var(--ink);cursor:pointer}
+.flt>span{padding:4px 6px;border-radius:2px;transition:color var(--duration-micro) var(--ease-standard),background-color var(--duration-micro) var(--ease-standard)}
+.flt>span::before{content:"[ "}
+.flt>span::after{content:" ]"}
+.flt:hover>span{background-color:var(--terra-wash)}
+.flt[aria-pressed="true"]>span{background-color:var(--ink);color:var(--bg)}
+.search{width:100%;min-height:44px;box-sizing:border-box;padding:0;background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;color:var(--ink);font-family:var(--font-mono);font-size:.875rem}
+.search::placeholder{color:var(--ink-2);opacity:1}
+.arow{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;align-items:baseline;min-height:44px;box-sizing:border-box;padding:14px 0;border-bottom:1px solid var(--rule-sub);color:var(--ink);text-decoration:none;transition:background-color var(--duration-micro) var(--ease-standard)}
+a.arow:hover,a.arow:focus-visible{background-color:var(--terra-wash)}
+.arow.is-empty{color:var(--ink-2)}
+.clear{display:inline-flex;align-items:center;min-height:44px;padding:0;background:none;border:0;color:var(--ink);cursor:pointer;text-decoration:underline;text-decoration-color:var(--terracotta);text-underline-offset:6px}
+/* Workbench and Track Record rows */
+.brow{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;padding:20px 0;border-top:1px solid var(--rule)}
+.brow dl,.brow dd{margin:0}
+.nav-menu{display:none;align-items:center;min-height:44px;padding:0;background:none;border:0;color:var(--ink);cursor:pointer}
+.foot-link{text-decoration:none;display:inline-flex;min-height:44px;align-items:center}
+.foot-link:hover{text-decoration:underline;text-decoration-color:var(--terracotta);text-underline-offset:6px}
+/* View transitions */
+::view-transition-group(*){animation-duration:var(--duration-medium);animation-timing-function:var(--ease-standard)}
+/* DRAFT + FLIGHT · project opening and return, cinematic. The list stays underneath; the detail sheet unrolls across the entry's band, then opens to full height. Index, title and sheet keep their identity. */
+html[data-vt="open"]::view-transition-group(vt-sheet),html[data-vt="open"]::view-transition-group(vt-title),html[data-vt="open"]::view-transition-group(vt-index),html[data-vt="return"]::view-transition-group(vt-sheet),html[data-vt="return"]::view-transition-group(vt-title),html[data-vt="return"]::view-transition-group(vt-index){animation-duration:var(--duration-cinematic);animation-timing-function:var(--ease-cinematic)}
+html[data-vt="open"]::view-transition-old(root),html[data-vt="open"]::view-transition-new(root),html[data-vt="return"]::view-transition-old(root),html[data-vt="return"]::view-transition-new(root){mix-blend-mode:normal}
+html[data-vt="open"]::view-transition-old(root),html[data-vt="return"]::view-transition-new(root){animation:none}
+html[data-vt="open"]::view-transition-new(root){animation:vt-unroll var(--duration-cinematic) var(--ease-cinematic) both}
+html[data-vt="return"]::view-transition-old(root){z-index:1;animation:vt-rollback var(--duration-cinematic) var(--ease-cinematic) both}
+@keyframes vt-unroll{0%{clip-path:inset(var(--vt-top) 100% var(--vt-bottom) 0)}45%{clip-path:inset(var(--vt-top) 0 var(--vt-bottom) 0)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes vt-rollback{0%{clip-path:inset(0 0 0 0)}55%{clip-path:inset(var(--vt-top) 0 var(--vt-bottom) 0)}100%{clip-path:inset(var(--vt-top) 100% var(--vt-bottom) 0)}}
+/* WIND · next project (forward) and leaving a project by the navigation (back): short out, medium in, never through the paper ground */
+html[data-vt="forward"]::view-transition,html[data-vt="back"]::view-transition{background-color:#1C1F25}
+html[data-vt="forward"]::view-transition-old(root),html[data-vt="back"]::view-transition-old(root){animation:vt-wind-out var(--duration-short) var(--ease-exit) both}
+html[data-vt="forward"]::view-transition-new(root){animation:vt-wind-enter var(--duration-medium) var(--ease-enter) var(--duration-short) both}
+html[data-vt="back"]::view-transition-new(root){animation:vt-wind-return var(--duration-medium) var(--ease-enter) var(--duration-short) both}
+@keyframes vt-wind-out{to{opacity:0;transform:translateX(calc(var(--amp-wind) * -1))}}
+@keyframes vt-wind-enter{from{opacity:0;transform:translateX(calc(var(--amp-wind) * -1))}}
+@keyframes vt-wind-return{from{opacity:0;transform:translateX(var(--amp-wind))}}
+@keyframes wind-enter{from{opacity:0;transform:translateX(calc(var(--amp-wind) * -1))}}
+@keyframes wind-exit{to{transform:translateX(calc(var(--amp-wind) * -1));opacity:0}}
+@keyframes flight-recede{to{transform:scale(.94)}}
+@keyframes petal-pass{0%{opacity:0;transform:translate(-30px,0) rotate(0deg)}15%{opacity:.9}50%{transform:translate(calc(var(--tx) * .55),calc(var(--ty) * .2 - 14px)) rotate(calc(var(--rot) * .5))}80%{opacity:.8}100%{opacity:0;transform:translate(var(--tx),var(--ty)) rotate(var(--rot))}}
+@media (prefers-reduced-motion:no-preference){
+html{scroll-behavior:smooth}
+/* WIND · the rail travels horizontally when a control asks for a sheet */
+.rail{scroll-behavior:smooth}
+/* WIND · hero words arrive, cinematic, 120ms apart */
+.hero-copy>*{animation:wind-enter var(--duration-cinematic) var(--ease-cinematic) both}
+.hero-copy>:nth-child(2){animation-delay:120ms}
+.hero-copy>:nth-child(3){animation-delay:240ms}
+.hero-copy>:nth-child(4){animation-delay:360ms}
+/* WIND · a chapter heading arrives on entering view, medium, 40ms apart */
+html[data-motion="on"] [data-reveal="wind"]>*{transition:opacity var(--duration-medium) var(--ease-enter),transform var(--duration-medium) var(--ease-enter)}
+html[data-motion="on"] [data-reveal="wind"]>:nth-child(2){transition-delay:var(--duration-stagger)}
+html[data-motion="on"] [data-reveal="wind"]>:nth-child(3){transition-delay:calc(var(--duration-stagger) * 2)}
+html[data-motion="on"] [data-reveal="wind"]:not([data-in])>*{opacity:0;transform:translateX(calc(var(--amp-wind) * -1))}
+/* DRAFT · rules are drawn on entering view, medium */
+html[data-motion="on"] [data-reveal="rule"]{transition:transform var(--duration-medium) var(--ease-standard)}
+html[data-motion="on"] [data-reveal="rule"]:not([data-in]){transform:scaleX(0)}
+html[data-motion="on"] .steps>:nth-child(2) [data-reveal="rule"]{transition-delay:var(--duration-stagger)}
+html[data-motion="on"] .steps>:nth-child(3) [data-reveal="rule"]{transition-delay:calc(var(--duration-stagger) * 2)}
+html[data-motion="on"] .steps>:nth-child(4) [data-reveal="rule"]{transition-delay:calc(var(--duration-stagger) * 3)}
+html[data-motion="on"] .steps>:nth-child(5) [data-reveal="rule"]{transition-delay:calc(var(--duration-stagger) * 4)}
+html[data-motion="on"] .sec-row[data-reveal]::before{transition:transform var(--duration-medium) var(--ease-standard)}
+html[data-motion="on"] .sec-row[data-reveal]:not([data-in])::before{transform:scaleX(0)}
+/* PETAL · five petals, one pass, once per session, at the hero to paper handoff */
+html[data-motion="on"] .petals[data-in] .petal{animation:petal-pass var(--duration-cinematic) var(--ease-cinematic) both}
+@supports (animation-timeline:view()){
+#intro{view-timeline:--paper block}
+/* FLIGHT · the scene recedes with the scroll, 1 to .94, no easing */
+.hero-stage{animation:flight-recede linear both;animation-timeline:--paper;animation-range:entry 0% entry 100%}
+/* WIND · the hero words leave with the scroll */
+.hero-copy{animation:wind-exit linear both;animation-timeline:--paper;animation-range:entry 0% entry 45%}
+}
+}
+/* Reduced motion alters the choreography, not the meaning */
+@media (prefers-reduced-motion:reduce){
+.petals{display:none}
+.arrow{transition:none;transform:none!important}
+.nav-link::after{transform:none;opacity:0;transition:opacity var(--duration-micro) var(--ease-standard)}
+.nav-link:hover::after,.nav-link:focus-visible::after,.nav-link.is-current::after{opacity:1}
+.entry-sheet{clip-path:none;opacity:0;transition:opacity var(--duration-short) var(--ease-standard)}
+.entry:hover .entry-sheet,.entry:focus-visible .entry-sheet,.entry.is-open .entry-sheet,.entry.is-current .entry-sheet{clip-path:none;opacity:1}
+.rule-ink,.m-disclosure,.m-disclosure>*,.m-results,.cap::after{transition:none}
+::view-transition-group(*),::view-transition-old(root),::view-transition-new(root){animation-duration:var(--duration-short)}
+}
+@media (hover:none){
+.entry .entry-sheet{clip-path:none;opacity:1}
+}
+/* Tablet and phone: one scale step down, single column, own hero crop */
+@media (max-width:1023px){
+.t-display1{font-size:2.441rem}
+.t-display2{font-size:1.953rem}
+.t-title1{font-size:1.563rem}
+.t-title2{font-size:1.25rem}
+.t-quote{font-size:1.25rem}
+.pad-x{padding-left:40px!important;padding-right:40px!important}
+.nav{padding-left:40px!important;padding-right:40px!important}
+.g12{grid-template-columns:minmax(0,1fr)!important;row-gap:24px!important}
+.g12>*{grid-column:1 / -1!important}
+.steps{grid-template-columns:repeat(2,minmax(0,1fr))!important;row-gap:40px!important}
+.cap,.arow,.brow{row-gap:8px}
+.rail{padding:0 40px;scroll-padding-inline:40px}
+.slide{flex-basis:88%}
+.col-heads{display:none!important}
+.hero-copy{left:40px!important;bottom:40px!important}
+.hero-video{object-position:26% 50%!important}
+.ret-grid{grid-template-columns:minmax(0,1fr)!important}
+.ret-next{align-items:flex-start;text-align:left}
+}
+/* Phones: own 4:5 crop, words below the scene on Night, no scrim, no recession */
+@media (max-width:639px){
+.pad-x{padding-left:20px!important;padding-right:20px!important}
+.nav{padding-left:20px!important;padding-right:20px!important}
+.nav-menu{display:inline-flex}
+.nav-list{display:none!important;position:absolute;top:72px;left:0;right:0;flex-direction:column;align-items:flex-start!important;gap:0!important;padding:8px 20px 24px!important;background:var(--bg-elevated);border-bottom:1px solid var(--rule)}
+.nav-list.is-open{display:flex!important}
+.nav-list .nav-link{font-family:var(--font-display);font-weight:500;font-size:1.563rem;letter-spacing:0;text-transform:none;min-height:52px}
+.petals{display:none}
+.rec-head{flex-wrap:wrap}
+.rail{gap:16px;padding:0 20px;scroll-padding-inline:20px}
+.slide{padding-left:16px}
+.hero{position:relative!important;height:auto!important}
+.hero-stage{position:relative!important;inset:auto!important;aspect-ratio:4 / 5;animation:none!important}
+.hero-scrim{display:none}
+.hero-video{object-position:30% 50%!important}
+.hero-copy{position:static!important;width:auto!important;padding:32px 20px 48px;animation:none!important}
+.hero-actions{flex-wrap:wrap;row-gap:0!important}
+.steps{grid-template-columns:minmax(0,1fr)!important}
+.spec{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.evidence-grid{grid-template-columns:minmax(0,1fr)!important}
+}
+</style>
+</helmet>
+<div class="{{themeClass}}" style="position: relative; width: 100%; min-height: 100vh; background: var(--bg); color: var(--ink); font-family: var(--font-sans)">
+<a class="skip t-label" href="#main">Skip to content</a>
+
+<nav class="{{navClass}}" aria-label="Primary" onKeyDown="{{navKey}}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 72px; box-sizing: border-box; padding: 0 max(64px, calc((100% - 1312px) / 2)); display: flex; align-items: center; justify-content: space-between">
+<a class="brand" href="#/" onClick="{{goTop}}" style="font-family: var(--font-display); font-weight: 500; font-size: 1rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink)">Vitor Tavares</a>
+<button class="nav-menu t-label" type="button" aria-expanded="{{menuExpanded}}" aria-controls="nav-list" onClick="{{toggleMenu}}">Menu</button>
+<ul id="nav-list" class="{{navListClass}}" style="display: flex; align-items: center; gap: 40px; list-style: none; margin: 0; padding: 0">
+<li><a class="{{workLinkClass}} t-label" href="#/projects" aria-current="{{workCurrent}}" onClick="{{goWork}}">Work</a></li>
+<li><a class="{{labLinkClass}} t-label" href="#/lab" aria-current="{{labCurrent}}" onClick="{{goLab}}">Lab</a></li>
+<li><a class="{{aboutLinkClass}} t-label" href="#/about" aria-current="{{aboutCurrent}}" onClick="{{goAbout}}">About</a></li>
+<li><a class="{{contactLinkClass}} t-label" href="#/contact" aria-current="{{contactCurrent}}" onClick="{{goContact}}">Contact</a></li>
+</ul>
+</nav>
+
+<sc-if value="{{isHome}}" hint-placeholder-val="{{true}}">
+<header id="top" class="hero env-night" data-env="night" style="position: sticky; top: 0; z-index: 0; height: max(min(100vh, 62.5vw), 560px); overflow: hidden">
+<div class="hero-stage" role="img" aria-label="Animated scene: a man in a fedora and round glasses reaches toward a branch of a cherry tree in bloom, petals drifting across a park." style="position: absolute; inset: 0">
+<video class="hero-video" ref="{{setVideo}}" src="./assets/cf3a0289b71ad71fc539c12de2668671.mp4" poster="./assets/98cd6a44b62f5ea65a0e7c3d0a050f99.jpg" autoplay="" muted="" loop="" playsinline="" preload="auto" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%"></video>
+<div class="hero-scrim" style="position: absolute; inset: 0; pointer-events: none"></div>
+</div>
+<div class="hero-copy" style="position: absolute; left: max(64px, calc((100% - 1312px) / 2)); bottom: 48px; width: 340px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px">
+<p class="t-overline" style="margin: 0; color: var(--ink)">Software developer</p>
+<h1 class="t-display1" style="margin: 0; color: var(--ink)">Vitor Tavares</h1>
+<p class="t-lead" style="margin: 0 0 4px; color: var(--ink)">Building software systems from embedded and cloud infrastructure to real-time applications.</p>
+<div class="hero-actions" style="display: flex; align-items: center; gap: 28px; white-space: nowrap">
+<a class="cta t-label" href="#work" style="color: var(--ink)">View work<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"></path></svg></a>
+<button class="scene-btn t-overline" type="button" onClick="{{toggleScene}}">
+<sc-if value="{{paused}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z"></path></svg></sc-if>
+<sc-if value="{{playing}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1h3v10H2zM7 1h3v10H7z"></path></svg></sc-if>
+<span>{{sceneLabel}}</span>
+</button>
+<a class="cue t-overline" href="#intro" aria-label="Scroll to the manifesto" style="color: var(--ink)">Scroll<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"></path></svg></a>
+</div>
+</div>
+</header>
+
+<main id="main" style="position: relative; z-index: 1">
+<section id="intro" aria-labelledby="intro-title" class="pad-x env-paper" data-env="paper" style="position: relative; overflow: hidden; background: var(--bg); padding: 128px 64px 96px">
+<div class="petals" data-reveal="petal" aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 120px; pointer-events: none">
+<svg class="petal" viewBox="0 0 22 16"><path d="M1 8C5 1 14 0 21 5c-4 1-5 3-6 6C10 15 4 13 1 8z"></path></svg>
+<svg class="petal" viewBox="0 0 22 16"><path d="M1 8C5 1 14 0 21 5c-4 1-5 3-6 6C10 15 4 13 1 8z"></path></svg>
+<svg class="petal" viewBox="0 0 22 16"><path d="M1 8C5 1 14 0 21 5c-4 1-5 3-6 6C10 15 4 13 1 8z"></path></svg>
+<svg class="petal" viewBox="0 0 22 16"><path d="M1 8C5 1 14 0 21 5c-4 1-5 3-6 6C10 15 4 13 1 8z"></path></svg>
+<svg class="petal" viewBox="0 0 22 16"><path d="M1 8C5 1 14 0 21 5c-4 1-5 3-6 6C10 15 4 13 1 8z"></path></svg>
+</div>
+<div class="g12" style="max-width: 1312px; margin: 0 auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 96px">
+<div class="g12" data-reveal="wind" style="grid-column: 1 / span 8; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: 24px; row-gap: 40px">
+<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 12px">
+<p class="t-overline" style="margin: 0; color: var(--ink-2)">Manifesto</p>
+<h2 id="intro-title" class="t-display2" style="margin: 0; color: var(--ink)">I start where the signal starts — at the board, the wire, the protocol — and follow it all the way to the screen.</h2>
+</div>
+<p class="t-lead" style="grid-column: 3 / span 6; margin: 0; max-width: 44ch; color: var(--ink)">Every project here follows the same five moves, and each move leaves a record.</p>
+</div>
+<ol class="steps" aria-label="How I work" style="grid-column: 3 / span 10; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 24px">
+<li style="display: flex; flex-direction: column; gap: 12px">
+<span class="draw-rule" data-reveal="rule" aria-hidden="true"></span>
+<p class="t-overline" style="margin: 4px 0 0; color: var(--ink-2)">01</p>
+<h3 class="t-title3" style="margin: 0">Observe</h3>
+<p class="t-bodysm" style="margin: 0; color: var(--ink-2)">Read the schematic before writing the spec. Hardware assumptions get checked early.</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 12px">
+<span class="draw-rule" data-reveal="rule" aria-hidden="true"></span>
+<p class="t-overline" style="margin: 4px 0 0; color: var(--ink-2)">02</p>
+<h3 class="t-title3" style="margin: 0">Draft</h3>
+<p class="t-bodysm" style="margin: 0; color: var(--ink-2)">Write the protocol down and version it. Ask the teams you depend on for the smallest change.</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 12px">
+<span class="draw-rule" data-reveal="rule" aria-hidden="true"></span>
+<p class="t-overline" style="margin: 4px 0 0; color: var(--ink-2)">03</p>
+<h3 class="t-title3" style="margin: 0">Build</h3>
+<p class="t-bodysm" style="margin: 0; color: var(--ink-2)">Build against a synthetic source, so missing hardware never blocks the pipeline.</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 12px">
+<span class="draw-rule" data-reveal="rule" aria-hidden="true"></span>
+<p class="t-overline" style="margin: 4px 0 0; color: var(--ink-2)">04</p>
+<h3 class="t-title3" style="margin: 0">Ship</h3>
+<p class="t-bodysm" style="margin: 0; color: var(--ink-2)">Ship the core that holds, and name what was deferred as technical debt.</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 12px">
+<span class="draw-rule" data-reveal="rule" aria-hidden="true"></span>
+<p class="t-overline" style="margin: 4px 0 0; color: var(--ink-2)">05</p>
+<h3 class="t-title3" style="margin: 0">Evidence</h3>
+<p class="t-bodysm" style="margin: 0; color: var(--ink-2)">Publish each claim with the record that backs it, or mark it as not yet measured.</p>
+</li>
+</ol>
+</div>
+</section>
+
+<section id="capabilities" aria-labelledby="cap-title" class="pad-x env-paper" data-env="paper" style="position: relative; background: var(--bg); padding: 32px 64px 128px">
+<div style="max-width: 1312px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px">
+<header class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: end">
+<div data-reveal="wind" style="grid-column: 1 / span 8; display: flex; flex-direction: column; gap: 12px">
+<p class="t-overline" style="margin: 0; color: var(--ink-2)">Capabilities</p>
+<h2 id="cap-title" class="t-display2" style="margin: 0">What I build, and where it is backed.</h2>
+</div>
+</header>
+<ol style="list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule)">
+<sc-for list="{{caps}}" as="c" hint-placeholder-count="4">
+<li class="cap-item">
+<button class="cap g12" type="button" aria-expanded="{{c.expanded}}" aria-controls="cap-panel-{{c.n}}" onClick="{{c.toggle}}" style="grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: baseline">
+<span class="t-meta" style="grid-column: 1 / span 1; color: var(--ink-2)">{{c.n}}</span>
+<span style="grid-column: 2 / span 6; display: flex; flex-direction: column; gap: 6px">
+<span class="t-title2 caps">{{c.title}}</span>
+<span class="t-meta" style="color: var(--ink-2)">{{c.stack}}</span>
+</span>
+<span class="t-meta" style="grid-column: 8 / span 2">Projects {{c.projects}}</span>
+<span class="t-meta" style="grid-column: 10 / span 2">Evidence {{c.evidence}}</span>
+<span style="grid-column: 12 / span 1; display: flex; justify-content: flex-end"><svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"></path></svg></span>
+</button>
+<div id="cap-panel-{{c.n}}" class="{{c.panelClass}}">
+<div>
+<div class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding: 8px 0 28px">
+<p class="t-body" style="grid-column: 2 / span 6; margin: 0; max-width: 68ch">{{c.details}}</p>
+<ul style="grid-column: 8 / span 4; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+<sc-for list="{{c.links}}" as="l" hint-placeholder-count="2">
+<li><a class="cap-link t-label" href="#project-{{l.id}}" onClick="{{l.open}}">Open project {{l.num}}<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"></path></svg></a></li>
+</sc-for>
+</ul>
+</div>
+</div>
+</div>
+</li>
+</sc-for>
+</ol>
+</div>
+</section>
+
+<section id="work" aria-labelledby="work-title" class="env-night work" data-env="night" onKeyDown="{{workKey}}" style="position: relative; background: var(--bg); padding: 128px 0 128px">
+<div class="ruler" aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0"></div>
+<div id="work-pin" class="pin" style="display: flex; flex-direction: column; gap: 64px">
+<div class="pad-x" style="padding: 0 64px">
+<header class="g12" style="max-width: 1312px; margin: 0 auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 24px; align-items: end">
+<div data-reveal="wind" style="grid-column: 1 / span 8; display: flex; flex-direction: column; gap: 12px">
+<p class="t-overline" style="margin: 0; color: var(--ink-2)">Selected work</p>
+<h2 id="work-title" class="t-display2" style="margin: 0">Three projects, each drawn in full.</h2>
+</div>
+<p class="t-meta" role="status" aria-live="polite" aria-label="{{railIndexLabel}}" style="grid-column: 10 / span 3; margin: 0 0 6px; text-align: right; color: var(--ink-2); font-variant-numeric: tabular-nums"><span style="color: var(--ink)">{{railIndex}}</span> / 03</p>
+</header>
+</div>
+<ol id="rail" class="rail" tabindex="-1" onScroll="{{onRail}}">
+<sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
+<li id="entry-{{p.id}}" class="slide">
+<a class="{{p.entryClass}} g12" href="#/projects/{{p.id}}" onClick="{{p.open}}" onFocus="{{p.focusSlide}}" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 32px; text-decoration: none; color: var(--ink)">
+<p class="t-overline" style="grid-column: 1 / span 2; margin: 12px 0 0; color: var(--ink-2); view-transition-name: {{p.vtIndex}}">Project {{p.num}}</p>
+<div style="grid-column: 3 / span 5; display: flex; flex-direction: column; gap: 12px">
+<p class="t-overline" style="margin: 12px 0 0; color: var(--ink-2)">{{p.category}}</p>
+<h3 class="t-title1" style="margin: 0; view-transition-name: {{p.vtTitle}}">{{p.title}}</h3>
+<p class="t-meta" style="margin: 0; color: var(--ink-2)">{{p.stack}}</p>
+<p class="t-body" style="margin: 4px 0 0; max-width: 44ch">{{p.summary}}</p>
+<dl style="margin: 8px 0 0; display: flex; flex-wrap: wrap; column-gap: 40px; row-gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<dt class="t-overline" style="color: var(--ink-2)">Status</dt>
+<dd class="t-meta" style="margin: 0">{{p.status}}</dd>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<dt class="t-overline" style="color: var(--ink-2)">Evidence</dt>
+<dd class="t-meta" style="margin: 0; display: flex; align-items: center; gap: 8px"><span class="mark is-confirmed" aria-hidden="true"></span>{{p.evidenceMark}}</dd>
+</div>
+</dl>
+</div>
+<div class="entry-figure" aria-hidden="true" style="grid-column: 8 / span 5; aspect-ratio: 3 / 2">
+<span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+<div class="entry-sheet sheet-grid" style="view-transition-name: {{p.vtSheet}}">
+<div class="entry-sheet-inner">
+<sc-if value="{{p.isA}}" hint-placeholder-val="{{false}}">
+<svg class="dg" viewBox="0 0 960 400" preserveAspectRatio="xMidYMid meet"><path class="lead" d="M95 150V96H107"></path><text class="ann" x="113" y="100">skills: spec · issue-coordinator · fix-loop-agent · worktree-ship · guardian</text><rect class="n" x="30" y="150" width="130" height="72"></rect><text class="lbl" x="44" y="191">Ideation</text><path class="e" d="M160 186H182M174 181l8 5-8 5"></path><rect class="n" x="182" y="150" width="130" height="72"></rect><text class="lbl" x="196" y="191">Backlog</text><path class="e" d="M312 186H334M326 181l8 5-8 5"></path><rect class="n" x="334" y="150" width="130" height="72"></rect><text class="lbl" x="348" y="182">Worktree</text><text class="sub" x="348" y="204">isolated</text><path class="e" d="M464 186H486M478 181l8 5-8 5"></path><rect class="n" x="486" y="150" width="130" height="72"></rect><text class="lbl" x="500" y="182">Fix loop</text><text class="sub" x="500" y="204">autonomous</text><path class="e" d="M616 186H638M630 181l8 5-8 5"></path><rect class="n" x="638" y="150" width="130" height="72"></rect><text class="lbl" x="652" y="191">Ship</text><path class="e" d="M768 186H790M782 181l8 5-8 5"></path><rect class="n" x="790" y="150" width="130" height="72"></rect><text class="lbl" x="804" y="191">Guard</text><text class="ann" x="30" y="258">TypeScript on Deno · agents · skills · MCP · CLI · hooks</text><rect class="tb" x="30" y="312" width="280" height="52"></rect><path class="tb" d="M30 336H310"></path><text class="tb-t" x="42" y="329">Fig. 01 · Workflow cycle</text><text class="tb-s" x="42" y="355">from the repository README</text></svg>
+</sc-if>
+<sc-if value="{{p.isB}}" hint-placeholder-val="{{false}}">
+<svg class="dg" viewBox="0 0 960 400" preserveAspectRatio="xMidYMid meet"><rect class="n" x="40" y="152" width="150" height="96"></rect><text class="lbl" x="56" y="194">Frontend</text><text class="sub" x="56" y="218">Next.js</text><path class="e" d="M190 200H250M242 195l8 5-8 5"></path><rect class="n" x="250" y="152" width="180" height="96"></rect><text class="lbl" x="266" y="194">Core API</text><text class="sub" x="266" y="218">Java · Spring Boot</text><path class="e" d="M430 200H490M482 195l8 5-8 5"></path><text class="ann" x="440" y="188">jobs</text><rect class="n" x="490" y="152" width="150" height="96"></rect><text class="lbl" x="506" y="194">RabbitMQ</text><text class="sub" x="506" y="218">queue</text><path class="e" d="M640 200H680V88H720M680 200H720M680 200V312H720M712 83l8 5-8 5M712 195l8 5-8 5M712 307l8 5-8 5"></path><rect class="n" x="720" y="60" width="200" height="56"></rect><text class="lbl" x="736" y="93">Ingestion</text><rect class="n" x="720" y="172" width="200" height="56"></rect><text class="lbl" x="736" y="205">RAG</text><rect class="n" x="720" y="284" width="200" height="56"></rect><text class="lbl" x="736" y="317">CrewAI · Python</text><path class="e" d="M340 248V300M335 292l5 8 5-8"></path><rect class="n" x="250" y="300" width="180" height="64"></rect><text class="lbl" x="266" y="328">PostgreSQL</text><text class="sub" x="266" y="350">pgvector</text><text class="ann" x="490" y="322">Rust services:</text><text class="ann" x="490" y="342">parallel data processing</text><rect class="tb" x="40" y="312" width="190" height="52"></rect><path class="tb" d="M40 336H230"></path><text class="tb-t" x="52" y="329">Fig. 02 · Delphos</text><text class="tb-s" x="52" y="355">from the README</text></svg>
+</sc-if>
+<sc-if value="{{p.isC}}" hint-placeholder-val="{{false}}">
+<svg class="dg" viewBox="0 0 960 400" preserveAspectRatio="xMidYMid meet"><path class="lead" d="M375 140V96H387"></path><text class="ann" x="393" y="100">KiCad: electronics · FreeCAD: mechanical structure</text><rect class="n" x="40" y="140" width="180" height="96"></rect><text class="lbl" x="56" y="182">Coffee maker</text><text class="sub" x="56" y="206">mechanical switch</text><path class="e" d="M220 188H290M282 183l8 5-8 5"></path><text class="ann" x="232" y="176">relay</text><rect class="n" x="290" y="140" width="170" height="96"></rect><text class="lbl" x="306" y="182">ESP32 module</text><text class="sub" x="306" y="206">ESP-IDF · FreeRTOS</text><path class="e" d="M460 188H540M532 183l8 5-8 5"></path><text class="ann" x="476" y="176">MQTT</text><rect class="n" x="540" y="140" width="170" height="96"></rect><text class="lbl" x="556" y="182">AWS IoT Core</text><text class="sub" x="556" y="206">device broker</text><path class="e" d="M710 188H750M742 183l8 5-8 5"></path><rect class="n" x="750" y="140" width="170" height="96"></rect><text class="lbl" x="766" y="182">Kotlin API</text><text class="sub" x="766" y="206">Spring Boot</text><path class="e" d="M835 236V300M830 292l5 8 5-8"></path><rect class="n" x="750" y="300" width="170" height="64"></rect><text class="lbl" x="766" y="337">PostgreSQL</text><path class="e" d="M375 236V300"></path><text class="ann" x="387" y="274">BLE</text><rect class="n" x="290" y="300" width="170" height="64"></rect><text class="lbl" x="306" y="328">Clients</text><text class="sub" x="306" y="350">multiplatform</text><rect class="tb" x="40" y="312" width="220" height="52"></rect><path class="tb" d="M40 336H260"></path><text class="tb-t" x="52" y="329">Fig. 03 · Cafey</text><text class="tb-s" x="52" y="355">system outline</text></svg>
+</sc-if>
+</div>
+</div>
+</div>
+<div style="grid-column: 1 / -1; display: flex; align-items: center; gap: 16px">
+<span class="rule-line" data-reveal="rule" aria-hidden="true"><span class="rule-ink"></span></span>
+<span class="entry-cta t-label" style="display: flex; align-items: center; gap: 10px; min-height: 44px"><svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"></path></svg>Open project</span>
+</div>
+</a>
+</li>
+</sc-for>
+<li class="slide slide-exit">
+<a class="exit" href="#/projects" onClick="{{goWork}}" onFocus="{{focusExit}}" style="display: flex; flex-direction: column; justify-content: space-between; gap: 32px; height: 100%; text-decoration: none; color: var(--ink)">
+<span style="display: flex; flex-direction: column; gap: 12px">
+<span class="t-overline" style="margin-top: 12px; color: var(--ink-2)">Project archive</span>
+<span class="t-title1">All projects</span>
+<span class="t-body" style="max-width: 32ch; color: var(--ink-2)">The selection ends here. The archive holds everything else, academic track included.</span>
+</span>
+<span style="display: flex; align-items: center; gap: 16px">
+<span class="rule-line" aria-hidden="true"><span class="rule-ink"></span></span>
+<span class="entry-cta t-label" style="display: flex; align-items: center; gap: 10px; min-height: 44px"><svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"></path></svg>Open the archive</span>
+</span>
+</a>
+</li>
+</ol>
+</div>
+</section>
+
+<section id="track" aria-labelledby="track-title" class="pad-x env-paper" data-env="paper" style="position: relative; background: var(--bg-surface); padding: 128px 64px 128px">
+<div class="g12" style="max-width: 1312px; margin: 0 auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 48px">
+<div data-reveal="wind" style="grid-column: 1 / span 8; display: flex; flex-direction: column; gap: 12px">
+<p class="t-overline" style="margin: 0; color: var(--ink-2)">Track record</p>
+<h2 id="track-title" class="t-display2" style="margin: 0">Where the work happened.</h2>
+</div>
+<ol style="grid-column: 3 / span 7; list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--rule)">
+<sc-for list="{{teaser}}" as="t" hint-placeholder-count="2">
+<li class="g12" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); column-gap: 24px; align-items: baseline; padding: 16px 0; border-top: 1px solid var(--rule)">
+<span class="t-title3" style="grid-column: 1 / span 3">{{t.org}}</span>
+<span class="t-body" style="grid-column: 4 / span 4">{{t.systems}}</span>
+</li>
+</sc-for>
+</ol>
+<p style="grid-column: 3 / span 7; margin: 0"><a class="cta t-label" href="#/about" onClick="{{goAbout}}" style="color: var(--ink)">About<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"></path></svg></a></p>
+</div>
+</section>
+</main>
+</sc-if>
+
+<sc-if value="{{isProjects}}" hint-placeholder-val="{{false}}">
+<main id="main" style="position: relative; z-index: 1">
+<section id="archive" aria-labelledby="page-title" class="pad-x env-night" data-env="night" style="position: relative; min-height: 100vh; box-sizing: border-box; background: var(--bg); padding: 168px 64px 128px">
+<div style="max-width: 1312px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px">
+<header class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: end">
+<div data-reveal="wind" style="grid-column: 1 / span 8; display: flex; flex-direction: column; gap: 12px">
+<p class="t-overline" style="margin: 0; color: var(--ink-2)">Project archive</p>
+<h1 id="page-title" tabindex="-1" class="t-display2" style="margin: 0; outline: none">Every entry, indexed.</h1>
+</div>
+<p class="t-meta" role="status" aria-live="polite" style="grid-column: 10 / span 3; margin: 0 0 6px; text-align: right; color: var(--ink-2)">{{archiveCount}}</p>
+</header>
+<div class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 24px; align-items: start">
+<div role="group" aria-label="Filter by kind of system" style="grid-column: 1 / span 8; align-self: end; display: flex; flex-wrap: wrap; align-items: center; column-gap: 8px">
+<sc-for list="{{kindFilters}}" as="f" hint-placeholder-count="5">
+<button class="flt t-overline" type="button" aria-pressed="{{f.pressed}}" onClick="{{f.pick}}"><span>{{f.label}}</span></button>
+</sc-for>
+<sc-if value="{{hasFilters}}" hint-placeholder-val="{{false}}">
+<button class="clear t-overline" type="button" onClick="{{clearFilters}}" style="margin-left: 16px">Clear</button>
+</sc-if>
+</div>
+<div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 4px">
+<label class="t-overline" for="archive-q" style="color: var(--ink-2)">Search the archive</label>
+<input id="archive-q" class="search" type="search" autocomplete="off" placeholder="name, technology, semester…" value="{{q}}" onChange="{{onSearch}}">
+</div>
+</div>
+<div class="{{resultsClass}}">
+<div class="arow g12 col-heads t-overline" aria-hidden="true" style="color: var(--ink-2); border-bottom-color: var(--rule)">
+<span style="grid-column: 1 / span 1">No.</span>
+<span style="grid-column: 2 / span 4">Title</span>
+<span style="grid-column: 6 / span 2">Category</span>
+<span style="grid-column: 8 / span 3">Stack</span>
+<span style="grid-column: 11 / span 2">State</span>
+</div>
+<ol style="list-style: none; margin: 0; padding: 0">
+<sc-for list="{{archiveRows}}" as="a" hint-placeholder-count="6">
+<li id="arow-{{a.id}}">
+<sc-if value="{{a.isDetail}}" hint-placeholder-val="{{true}}">
+<a class="arow g12" href="#/projects/{{a.id}}" onClick="{{a.open}}">
+<span class="t-meta" style="grid-column: 1 / span 1; color: var(--ink-2)">{{a.num}}</span>
+<span class="t-title3" style="grid-column: 2 / span 4">{{a.title}}</span>
+<span class="t-meta" style="grid-column: 6 / span 2">{{a.category}}</span>
+<span class="t-meta" style="grid-column: 8 / span 3; color: var(--ink-2)">{{a.stack}}</span>
+<span class="t-meta" style="grid-column: 11 / span 1">{{a.state}}</span>
+<span style="grid-column: 12 / span 1; display: flex; justify-content: flex-end"><svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"></path></svg></span>
+</a>
+</sc-if>
+<sc-if value="{{a.isExt}}" hint-placeholder-val="{{false}}">
+<a class="arow g12" href="{{a.href}}" target="_blank" rel="noopener noreferrer" aria-label="{{a.title}}, view repository (opens in a new tab)">
+<span class="t-meta" style="grid-column: 1 / span 1; color: var(--ink-2)">{{a.num}}</span>
+<span class="t-title3" style="grid-column: 2 / span 4">{{a.title}}</span>
+<span class="t-meta" style="grid-column: 6 / span 2">{{a.category}}</span>
+<span class="t-meta" style="grid-column: 8 / span 3; color: var(--ink-2)">{{a.stack}}</span>
+<span class="t-meta" style="grid-column: 11 / span 1">{{a.state}}</span>
+<span style="grid-column: 12 / span 1; display: flex; justify-content: flex-end"><svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7"></path></svg></span>
+</a>
+</sc-if>
+<sc-if value="{{a.isMulti}}" hint-placeholder-val="{{false}}">
+<div class="arow g12">
+<span class="t-meta" style="grid-column: 1 / span 1; color: var(--ink-2)">{{a.num}}</span>
+<span class="t-title3" style="grid-column: 2 / span 4">{{a.title}}</span>
+<span class="t-meta" style="grid-column: 6 / span 2">{{a.category}}</span>
+<span class="t-meta" style="grid-column: 8 / span 3; display: flex; flex-wrap: wrap; column-gap: 16px">
+<sc-for list="{{a.refs}}" as="r" hint-placeholder-count="3">
+<a class="cap-link" href="{{r.href}}" target="_blank" rel="noopener noreferrer" aria-label="{{a.title}} {{r.label}}, view repository (opens in a new tab)" style="min-height: 0">{{r.label}}</a>
+</sc-for>
+</span>
+<span class="t-meta" style="grid-column: 11 / span 2">{{a.state}}</span>
+</div>
+</sc-if>
+</li>
+</sc-for>
+</ol>
+<sc-if value="{{noResults}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 40px 0; border-bottom: 1px solid var(--rule-sub)">
+<p class="t-title3" style="margin: 0">No entry matches this query.</p>
+<p class="t-body" style="margin: 0; color: var(--ink-2)">Nothing in the archive matches that filter and that search together.</p>
+<button class="clear t-label" type="button" onClick="{{clearFilters}}">Clear filters</button>
+</div>
+</sc-if>
+</div>
+</div>
+</section>
+
+</main>
+</sc-if>
+
+<sc-if value="{{isLab}}" hint-placeholder-val="{{false}}">
+<main id="main" style="position: relative; z-index: 1">
+<section id="lab" aria-labelledby="page-title" class="pad-x env-night sheet-grid" data-env="night" style="position: relative; min-height: 100vh; box-sizing: border-box; padding: 168px 64px 128px">
+<div style="max-width: 1312px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px">
+<header class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: end">
+<div data-reveal="wind" style="grid-column: 1 / span 8; display: flex; flex-direction: column; gap: 12px">
+<p class="t-overline" style="margin: 0; color: var(--ink-2)">Workbench</p>
+<h1 id="page-title" tabindex="-1" class="t-display2" style="margin: 0; outline: none">What is on the bench, and what it is there for.</h1>
+</div>
+</header>
+<div style="display: flex; flex-direction: column; gap: 48px">
+<div class="brow g12 col-heads t-overline" aria-hidden="true" style="color: var(--ink-2); border-top: 0; padding: 0">
+<span style="grid-column: 1 / span 4">Item · what it is</span>
+<span style="grid-column: 5 / span 5">Why · where</span>
+<span style="grid-column: 10 / span 3">Related project · status</span>
+</div>
+<sc-for list="{{bench}}" as="g" hint-placeholder-count="5">
+<section aria-label="{{g.cat}}" style="display: flex; flex-direction: column; gap: 12px">
+<h3 class="t-overline" style="margin: 0; color: var(--ink)">{{g.cat}}</h3>
+<div>
+<sc-for list="{{g.items}}" as="b" hint-placeholder-count="2">
+<div class="brow g12">
+<div style="grid-column: 1 / span 4; display: flex; flex-direction: column; gap: 4px">
+<h4 class="t-title3" style="margin: 0">{{b.name}}</h4>
+<p class="t-bodysm" style="margin: 0; color: var(--ink-2)">{{b.what}}</p>
+</div>
+<dl class="t-bodysm" style="grid-column: 5 / span 5; display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 16px; row-gap: 6px">
+<dt class="t-overline" style="color: var(--ink-2); padding-top: 3px">Why</dt><dd>{{b.why}}</dd>
+<dt class="t-overline" style="color: var(--ink-2); padding-top: 3px">Where</dt><dd>{{b.where}}</dd>
+</dl>
+<dl class="t-meta" style="grid-column: 10 / span 3; display: flex; flex-direction: column; gap: 6px">
+<dt class="t-overline" style="color: var(--ink-2)">Used in</dt><dd>{{b.used}}</dd>
+<dt class="t-overline" style="color: var(--ink-2); margin-top: 6px">Status</dt><dd>{{b.status}}</dd>
+</dl>
+</div>
+</sc-for>
+</div>
+</section>
+</sc-for>
+</div>
+</div>
+</section>
+
+</main>
+</sc-if>
+
+<sc-if value="{{isAbout}}" hint-placeholder-val="{{false}}">
+<main id="main" style="position: relative; z-index: 1">
+<section id="about" aria-labelledby="page-title" class="pad-x env-paper" data-env="paper" style="position: relative; min-height: 100vh; box-sizing: border-box; background: var(--bg-surface); padding: 168px 64px 128px">
+<div style="max-width: 1312px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px">
+<div class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 40px; align-items: end">
+<div class="g12" data-reveal="wind" style="grid-column: 1 / span 8; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: 24px; row-gap: 40px">
+<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 12px">
+<p class="t-overline" style="margin: 0; color: var(--ink-2)">Track record</p>
+<h1 id="page-title" tabindex="-1" class="t-display2" style="margin: 0; outline: none">Where the work happened.</h1>
+</div>
+<div class="t-body" style="grid-column: 3 / span 6; display: flex; flex-direction: column; gap: 16px; max-width: 60ch">
+<p style="margin: 0">I work on IoT and cloud systems at Alfabra Elevadores: firmware at the edge, message pipelines in the middle, and the applications people actually read.</p>
+<p style="margin: 0">I study at Fatec Itaquera and graduate in December 2026.</p>
+</div>
+</div>
+<figure style="grid-column: 11 / span 2; margin: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px">
+<img src="./assets/6459ca023566a1bcd9baf79b83447e25.png" alt="Illustrated self-portrait: Vitor in a fedora and suspenders, tipping his hat, a tweed jacket over one arm." width="118" height="200" style="display: block; width: 118px; height: auto">
+<figcaption class="t-overline" style="color: var(--ink-2)">The author</figcaption>
+</figure>
+</div>
+<div>
+<div class="brow g12 col-heads t-overline" aria-hidden="true" style="color: var(--ink-2); border-top: 0; padding: 0 0 12px">
+<span style="grid-column: 1 / span 2">Period</span>
+<span style="grid-column: 3 / span 3">Role · organisation</span>
+<span style="grid-column: 6 / span 3">Systems</span>
+<span style="grid-column: 9 / span 4">Contribution</span>
+</div>
+<ol style="list-style: none; margin: 0; padding: 0">
+<sc-for list="{{track}}" as="t" hint-placeholder-count="2">
+<li class="brow g12">
+<p class="t-meta" style="grid-column: 1 / span 2; margin: 0"><time>{{t.period}}</time></p>
+<div style="grid-column: 3 / span 3; display: flex; flex-direction: column; gap: 4px">
+<h3 class="t-title3" style="margin: 0">{{t.org}}</h3>
+<p class="t-bodysm" style="margin: 0; color: var(--ink-2)">{{t.role}}</p>
+</div>
+<div style="grid-column: 6 / span 3; display: flex; flex-direction: column; gap: 4px">
+<p class="t-body" style="margin: 0">{{t.systems}}</p>
+<p class="t-meta" style="margin: 0; color: var(--ink-2)">{{t.tech}}</p>
+</div>
+<p class="t-body" style="grid-column: 9 / span 4; margin: 0">{{t.contribution}}</p>
+</li>
+</sc-for>
+</ol>
+</div>
+</div>
+</section>
+
+</main>
+</sc-if>
+
+<sc-if value="{{isContact}}" hint-placeholder-val="{{false}}">
+<main id="main" class="env-night horizon-sky" data-env="night" style="position: relative; z-index: 1; height: 96px"></main>
+</sc-if>
+
+<sc-if value="{{showFooter}}" hint-placeholder-val="{{true}}">
+<footer id="contact" class="pad-x env-night horizon-sky" data-env="night" style="position: relative; z-index: 1; padding: 128px 64px 48px">
+<div style="max-width: 1312px; margin: 0 auto; display: flex; flex-direction: column; gap: 96px">
+<div class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 40px">
+<div data-reveal="wind" style="grid-column: 1 / span 8; display: flex; flex-direction: column; gap: 12px">
+<p class="t-overline" style="margin: 0; color: var(--ink-2)">Contact</p>
+<h2 class="t-display2" style="margin: 0">Send the problem. I will start at the wire.</h2>
+</div>
+<ul style="grid-column: 3 / span 6; list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; column-gap: 40px; row-gap: 8px">
+<li><a class="foot-link t-title3" href="#contact">Email [LINK REQUIRED]</a></li>
+<li><a class="foot-link t-title3" href="#contact">GitHub [LINK REQUIRED]</a></li>
+<li><a class="foot-link t-title3" href="#contact">LinkedIn [LINK REQUIRED]</a></li>
+</ul>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<span class="horizon-line" data-reveal="rule" aria-hidden="true" style="transform-origin: left"></span>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; column-gap: 24px; row-gap: 8px">
+<p class="t-overline" style="margin: 0; color: var(--ink-2)">Vitor Tavares · São Paulo, Brazil</p>
+<div role="group" aria-label="Local time in São Paulo" class="t-overline" style="display: flex; align-items: center; gap: 10px; color: var(--ink)">
+<span>São Paulo</span>
+<time id="sp-clock" aria-hidden="true" style="font-variant-numeric: tabular-nums">{{clock}}</time>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</sc-if>
+
+<sc-if value="{{isDetail}}" hint-placeholder-val="{{false}}">
+<main id="main-detail" class="env-night" data-env="night" style="position: relative; z-index: 1; min-height: 100vh; background: var(--bg)">
+<article id="project-{{cur.id}}" aria-labelledby="project-title" class="pad-x" style="padding: 120px 64px 0">
+<div style="max-width: 1312px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--rule-sub); padding-bottom: 12px">
+<a class="back t-label" href="#work" onClick="{{backToWork}}" style="color: var(--ink)"><svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M14 8H3M7 4L3 8l4 4"></path></svg>Back to work</a>
+<p class="t-overline" style="margin: 0; color: var(--ink-2)">Selected work / {{cur.num}} of 03</p>
+</div>
+
+<header class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 16px">
+<p class="t-overline" style="grid-column: 1 / span 2; margin: 18px 0 0; color: var(--ink-2); view-transition-name: {{dVtIndex}}">Project {{cur.num}}</p>
+<div style="grid-column: 3 / span 10; display: flex; flex-direction: column; gap: 16px">
+<h1 id="project-title" tabindex="-1" class="t-display1 caps" style="margin: 0; outline: none; view-transition-name: {{dVtTitle}}">{{cur.title}}</h1>
+<p class="t-meta" style="margin: 0; color: var(--ink-2)">{{cur.stack}}</p>
+<p class="t-lead" style="margin: 8px 0 0; max-width: 44ch">{{cur.summary}}</p>
+</div>
+</header>
+
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div class="sheet-grid is-elevated" role="img" aria-label="{{cur.figAlt}}" style="position: relative; aspect-ratio: 12 / 5; border: 1px solid var(--rule); overflow: hidden; view-transition-name: {{dVtSheet}}">
+<sc-if value="{{cur.isA}}" hint-placeholder-val="{{false}}">
+<svg class="dg" viewBox="0 0 960 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="lead" d="M95 150V96H107"></path><text class="ann" x="113" y="100">skills: spec · issue-coordinator · fix-loop-agent · worktree-ship · guardian</text><rect class="n" x="30" y="150" width="130" height="72"></rect><text class="lbl" x="44" y="191">Ideation</text><path class="e" d="M160 186H182M174 181l8 5-8 5"></path><rect class="n" x="182" y="150" width="130" height="72"></rect><text class="lbl" x="196" y="191">Backlog</text><path class="e" d="M312 186H334M326 181l8 5-8 5"></path><rect class="n" x="334" y="150" width="130" height="72"></rect><text class="lbl" x="348" y="182">Worktree</text><text class="sub" x="348" y="204">isolated</text><path class="e" d="M464 186H486M478 181l8 5-8 5"></path><rect class="n" x="486" y="150" width="130" height="72"></rect><text class="lbl" x="500" y="182">Fix loop</text><text class="sub" x="500" y="204">autonomous</text><path class="e" d="M616 186H638M630 181l8 5-8 5"></path><rect class="n" x="638" y="150" width="130" height="72"></rect><text class="lbl" x="652" y="191">Ship</text><path class="e" d="M768 186H790M782 181l8 5-8 5"></path><rect class="n" x="790" y="150" width="130" height="72"></rect><text class="lbl" x="804" y="191">Guard</text><text class="ann" x="30" y="258">TypeScript on Deno · agents · skills · MCP · CLI · hooks</text><rect class="tb" x="30" y="312" width="280" height="52"></rect><path class="tb" d="M30 336H310"></path><text class="tb-t" x="42" y="329">Fig. 01 · Workflow cycle</text><text class="tb-s" x="42" y="355">from the repository README</text></svg>
+</sc-if>
+<sc-if value="{{cur.isB}}" hint-placeholder-val="{{false}}">
+<svg class="dg" viewBox="0 0 960 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect class="n" x="40" y="152" width="150" height="96"></rect><text class="lbl" x="56" y="194">Frontend</text><text class="sub" x="56" y="218">Next.js</text><path class="e" d="M190 200H250M242 195l8 5-8 5"></path><rect class="n" x="250" y="152" width="180" height="96"></rect><text class="lbl" x="266" y="194">Core API</text><text class="sub" x="266" y="218">Java · Spring Boot</text><path class="e" d="M430 200H490M482 195l8 5-8 5"></path><text class="ann" x="440" y="188">jobs</text><rect class="n" x="490" y="152" width="150" height="96"></rect><text class="lbl" x="506" y="194">RabbitMQ</text><text class="sub" x="506" y="218">queue</text><path class="e" d="M640 200H680V88H720M680 200H720M680 200V312H720M712 83l8 5-8 5M712 195l8 5-8 5M712 307l8 5-8 5"></path><rect class="n" x="720" y="60" width="200" height="56"></rect><text class="lbl" x="736" y="93">Ingestion</text><rect class="n" x="720" y="172" width="200" height="56"></rect><text class="lbl" x="736" y="205">RAG</text><rect class="n" x="720" y="284" width="200" height="56"></rect><text class="lbl" x="736" y="317">CrewAI · Python</text><path class="e" d="M340 248V300M335 292l5 8 5-8"></path><rect class="n" x="250" y="300" width="180" height="64"></rect><text class="lbl" x="266" y="328">PostgreSQL</text><text class="sub" x="266" y="350">pgvector</text><text class="ann" x="490" y="322">Rust services:</text><text class="ann" x="490" y="342">parallel data processing</text><rect class="tb" x="40" y="312" width="190" height="52"></rect><path class="tb" d="M40 336H230"></path><text class="tb-t" x="52" y="329">Fig. 02 · Delphos</text><text class="tb-s" x="52" y="355">from the README</text></svg>
+</sc-if>
+<sc-if value="{{cur.isC}}" hint-placeholder-val="{{false}}">
+<svg class="dg" viewBox="0 0 960 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="lead" d="M375 140V96H387"></path><text class="ann" x="393" y="100">KiCad: electronics · FreeCAD: mechanical structure</text><rect class="n" x="40" y="140" width="180" height="96"></rect><text class="lbl" x="56" y="182">Coffee maker</text><text class="sub" x="56" y="206">mechanical switch</text><path class="e" d="M220 188H290M282 183l8 5-8 5"></path><text class="ann" x="232" y="176">relay</text><rect class="n" x="290" y="140" width="170" height="96"></rect><text class="lbl" x="306" y="182">ESP32 module</text><text class="sub" x="306" y="206">ESP-IDF · FreeRTOS</text><path class="e" d="M460 188H540M532 183l8 5-8 5"></path><text class="ann" x="476" y="176">MQTT</text><rect class="n" x="540" y="140" width="170" height="96"></rect><text class="lbl" x="556" y="182">AWS IoT Core</text><text class="sub" x="556" y="206">device broker</text><path class="e" d="M710 188H750M742 183l8 5-8 5"></path><rect class="n" x="750" y="140" width="170" height="96"></rect><text class="lbl" x="766" y="182">Kotlin API</text><text class="sub" x="766" y="206">Spring Boot</text><path class="e" d="M835 236V300M830 292l5 8 5-8"></path><rect class="n" x="750" y="300" width="170" height="64"></rect><text class="lbl" x="766" y="337">PostgreSQL</text><path class="e" d="M375 236V300"></path><text class="ann" x="387" y="274">BLE</text><rect class="n" x="290" y="300" width="170" height="64"></rect><text class="lbl" x="306" y="328">Clients</text><text class="sub" x="306" y="350">multiplatform</text><rect class="tb" x="40" y="312" width="220" height="52"></rect><path class="tb" d="M40 336H260"></path><text class="tb-t" x="52" y="329">Fig. 03 · Cafey</text><text class="tb-s" x="52" y="355">system outline</text></svg>
+</sc-if>
+</div>
+<figcaption class="t-meta" style="color: var(--ink-2)">{{cur.fig}}</figcaption>
+</figure>
+
+<dl class="spec" style="margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 24px; row-gap: 24px">
+<sc-for list="{{cur.spec}}" as="s" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--rule); padding-top: 12px">
+<dt class="t-overline" style="color: var(--ink-2)">{{s.k}}</dt>
+<dd class="t-body" style="margin: 0">{{s.v}}</dd>
+</div>
+</sc-for>
+</dl>
+
+<div class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding: 40px 0 16px">
+<p class="t-overline" style="grid-column: 1 / span 2; margin: 10px 0 0; color: var(--ink-2)">Problem</p>
+<blockquote class="t-quote" style="grid-column: 3 / span 8; margin: 0">{{cur.problem}}</blockquote>
+</div>
+
+<section class="sec-row g12" data-reveal="rule-top" aria-label="Context" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding-top: 32px">
+<p class="t-overline" aria-hidden="true" style="grid-column: 1 / span 2; margin: 10px 0 0; color: var(--ink-2)">01</p>
+<div style="grid-column: 3 / span 7; display: flex; flex-direction: column; gap: 16px">
+<h2 class="t-title2" style="margin: 0">Context</h2>
+<p class="t-body" style="margin: 0; max-width: 68ch">{{cur.context}}</p>
+</div>
+</section>
+
+<section class="sec-row g12" data-reveal="rule-top" aria-label="Objective" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding-top: 32px">
+<p class="t-overline" aria-hidden="true" style="grid-column: 1 / span 2; margin: 10px 0 0; color: var(--ink-2)">02</p>
+<div style="grid-column: 3 / span 7; display: flex; flex-direction: column; gap: 16px">
+<h2 class="t-title2" style="margin: 0">Objective</h2>
+<p class="t-lead" style="margin: 0; max-width: 44ch">{{cur.objective}}</p>
+</div>
+</section>
+
+<section class="sec-row g12" data-reveal="rule-top" aria-label="Architecture" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding-top: 32px">
+<p class="t-overline" aria-hidden="true" style="grid-column: 1 / span 2; margin: 10px 0 0; color: var(--ink-2)">03</p>
+<div style="grid-column: 3 / span 7; display: flex; flex-direction: column; gap: 16px">
+<h2 class="t-title2" style="margin: 0">Architecture</h2>
+<p class="t-body" style="margin: 0; max-width: 68ch">{{cur.architecture}}</p>
+</div>
+</section>
+
+<section class="sec-row g12" data-reveal="rule-top" aria-label="Stack" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding-top: 32px">
+<p class="t-overline" aria-hidden="true" style="grid-column: 1 / span 2; margin: 10px 0 0; color: var(--ink-2)">04</p>
+<div style="grid-column: 3 / span 10; display: flex; flex-direction: column; gap: 16px">
+<h2 class="t-title2" style="margin: 0">Stack</h2>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; row-gap: 4px">
+<sc-for list="{{cur.stackList}}" as="t" hint-placeholder-count="4">
+<li class="chip t-meta">{{t}}</li>
+</sc-for>
+</ul>
+</div>
+</section>
+
+<section class="sec-row g12" data-reveal="rule-top" aria-label="Decisions" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding-top: 32px">
+<p class="t-overline" aria-hidden="true" style="grid-column: 1 / span 2; margin: 10px 0 0; color: var(--ink-2)">05</p>
+<h2 class="t-title2" style="grid-column: 3 / span 10; margin: 0">Decisions</h2>
+<ol style="grid-column: 3 / span 10; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+<sc-for list="{{cur.decisions}}" as="d" hint-placeholder-count="3">
+<li class="g12" style="display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); column-gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--rule-sub)">
+<span class="t-meta" style="grid-column: 1 / span 1; color: var(--ink-2); display: flex; align-items: center; gap: 8px; align-self: start"><svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2l6 6-6 6-6-6z"></path></svg>{{d.k}}</span>
+<h3 class="t-title3" style="grid-column: 2 / span 4; margin: 0">{{d.h}}</h3>
+<p class="t-body" style="grid-column: 6 / span 5; margin: 0">{{d.b}}</p>
+</li>
+</sc-for>
+</ol>
+</section>
+
+<section class="sec-row g12" data-reveal="rule-top" aria-label="Implementation" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding-top: 32px">
+<p class="t-overline" aria-hidden="true" style="grid-column: 1 / span 2; margin: 10px 0 0; color: var(--ink-2)">06</p>
+<div style="grid-column: 3 / span 7; display: flex; flex-direction: column; gap: 16px">
+<h2 class="t-title2" style="margin: 0">Implementation</h2>
+<p class="t-body" style="margin: 0; max-width: 68ch">{{cur.implementation}}</p>
+</div>
+</section>
+
+<section class="sec-row g12" data-reveal="rule-top" aria-label="Results" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding-top: 32px">
+<p class="t-overline" aria-hidden="true" style="grid-column: 1 / span 2; margin: 10px 0 0; color: var(--ink-2)">07</p>
+<h2 class="t-title2" style="grid-column: 3 / span 7; margin: 0 0 16px">Results</h2>
+<ul style="grid-column: 3 / span 7; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+<sc-for list="{{cur.results}}" as="r" hint-placeholder-count="3">
+<li class="t-body" style="display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--rule-sub)"><span>{{r.t}}</span><span class="t-meta ref">{{r.ref}}</span></li>
+</sc-for>
+</ul>
+</section>
+
+<section class="sec-row g12" data-reveal="rule-top" aria-label="Limitations" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding-top: 32px">
+<p class="t-overline" aria-hidden="true" style="grid-column: 1 / span 2; margin: 10px 0 0; color: var(--ink-2)">08</p>
+<h2 class="t-title2" style="grid-column: 3 / span 7; margin: 0 0 16px">Limitations</h2>
+<ul style="grid-column: 3 / span 7; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+<sc-for list="{{cur.limitations}}" as="r" hint-placeholder-count="2">
+<li class="t-body" style="display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--rule-sub)"><span>{{r.t}}</span><span class="t-meta ref">{{r.ref}}</span></li>
+</sc-for>
+</ul>
+</section>
+
+<section class="sec-row g12" data-reveal="rule-top" aria-label="Evidence" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding-top: 32px">
+<p class="t-overline" aria-hidden="true" style="grid-column: 1 / span 2; margin: 10px 0 0; color: var(--ink-2)">09</p>
+<div style="grid-column: 3 / span 7; display: flex; flex-direction: column; gap: 8px; margin: 0 0 32px">
+<h2 class="t-title2" style="margin: 0">Evidence</h2>
+<p class="t-bodysm" style="margin: 0; color: var(--ink-2)">Each record backs a claim made above; the reference beside a result, a limitation or a decision points here.</p>
+</div>
+<div class="evidence-grid" style="grid-column: 3 / span 10; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; row-gap: 48px">
+<sc-for list="{{cur.records}}" as="r" hint-placeholder-count="4">
+<article class="rec">
+<div class="rec-head t-overline" style="display: flex; align-items: center; gap: 10px">
+<sc-if value="{{r.isArchitecture}}" hint-placeholder-val="{{false}}"><svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3h5v4H2zM9 9h5v4H9zM7 5h4.5v4"></path></svg></sc-if>
+<sc-if value="{{r.isCode}}" hint-placeholder-val="{{false}}"><svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3H3v10h3M10 3h3v10h-3"></path></svg></sc-if>
+<sc-if value="{{r.isRuntime}}" hint-placeholder-val="{{false}}"><svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 9h3l2-5 3 9 2-6 1 2h3"></path></svg></sc-if>
+<sc-if value="{{r.isDecision}}" hint-placeholder-val="{{false}}"><svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2l6 6-6 6-6-6z"></path></svg></sc-if>
+<sc-if value="{{r.isMeasurement}}" hint-placeholder-val="{{false}}"><svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4v8M14 4v8M2 8h12"></path></svg></sc-if>
+<sc-if value="{{r.isDeployment}}" hint-placeholder-val="{{false}}"><svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M5 7l3 3 3-3M2 13h12"></path></svg></sc-if>
+<sc-if value="{{r.isLimitation}}" hint-placeholder-val="{{false}}"><svg class="glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3h12v10H2zM2 9l6-6M5 13l9-9M10 13l4-4"></path></svg></sc-if>
+<span>{{r.kind}}</span>
+<span aria-hidden="true" style="color: var(--ink-2)">·</span>
+<span>{{r.ref}}</span>
+<sc-if value="{{r.hasStatus}}" hint-placeholder-val="{{false}}">
+<span style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px"><span class="{{r.markClass}}" aria-hidden="true"></span>{{r.status}}</span>
+</sc-if>
+</div>
+<h3 class="t-title3" style="margin: 0">{{r.title}}</h3>
+<p class="t-body" style="margin: 0">{{r.desc}}</p>
+<sc-if value="{{r.hasMeasure}}" hint-placeholder-val="{{false}}">
+<dl class="rec-facts t-meta">
+<dt style="color: var(--ink-2)">Value</dt><dd>{{r.value}}</dd>
+<dt style="color: var(--ink-2)">Method</dt><dd>{{r.method}}</dd>
+<dt style="color: var(--ink-2)">Baseline</dt><dd>{{r.baseline}}</dd>
+</dl>
+</sc-if>
+<sc-if value="{{r.hasSource}}" hint-placeholder-val="{{false}}">
+<p class="t-meta" style="margin: 0; display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--rule-sub); padding-top: 10px"><span style="color: var(--ink-2)">{{r.sourceLabel}}</span><span>{{r.sourceValue}}</span></p>
+</sc-if>
+</article>
+</sc-for>
+</div>
+</section>
+
+<section class="sec-row g12" data-reveal="rule-top" aria-label="Links" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding-top: 32px">
+<p class="t-overline" aria-hidden="true" style="grid-column: 1 / span 2; margin: 10px 0 0; color: var(--ink-2)">10</p>
+<h2 class="t-title2" style="grid-column: 3 / span 7; margin: 0">Links</h2>
+<ul style="grid-column: 3 / span 7; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+<sc-for list="{{cur.links}}" as="l" hint-placeholder-count="2">
+<li style="display: flex; justify-content: space-between; align-items: center; gap: 24px; border-bottom: 1px solid var(--rule-sub); min-height: 52px">
+<span class="t-body">{{l.label}}</span>
+<a class="foot-link t-meta" href="{{l.href}}" target="_blank" rel="noopener noreferrer" aria-label="{{l.label}}: {{l.value}} (opens in a new tab)" style="gap: 8px; color: var(--ink)">{{l.value}}<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7"></path></svg></a>
+</li>
+</sc-for>
+</ul>
+</section>
+
+<nav class="ret-grid" aria-label="Project navigation" style="margin-top: 72px; border-top: 1px solid var(--rule); padding: 56px 0 120px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px">
+<a class="ret ret-back" href="#work" onClick="{{backToWork}}" style="color: var(--ink)">
+<span class="t-overline" style="color: var(--ink-2)">Return</span>
+<span class="ret-title t-display2"><svg class="arrow" viewBox="0 0 16 16" aria-hidden="true" style="width: 24px; height: 24px"><path d="M14 8H3M7 4L3 8l4 4"></path></svg>Back to work</span>
+</a>
+<a class="ret ret-next" href="#project-{{next.id}}" onClick="{{next.open}}" style="color: var(--ink)">
+<span class="t-overline" style="color: var(--ink-2)">Next · Project {{next.num}}</span>
+<span class="ret-title t-title1">{{next.title}}<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true" style="width: 24px; height: 24px"><path d="M2 8h11M9 4l4 4-4 4"></path></svg></span>
+</a>
+</nav>
+</div>
+</article>
+</main>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6600}}'>
+class Component extends DCLogic {
+  prefersReduced() {
+    return !!(typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
+  // A navegação assume o ambiente (Paper ou Night) da seção que está sob ela
+  syncNav() {
+    let env = 'night';
+    document.querySelectorAll('[data-env]').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top <= 36 && r.bottom > 36) env = el.getAttribute('data-env');
+    });
+    if (((this.state || {}).navEnv || 'night') !== env) this.setState({ navEnv: env });
+  }
+
+  componentDidMount() {
+    this._onScroll = () => {
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => { this._raf = 0; this.syncRail(); this.syncNav(); });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    window.addEventListener('resize', this._onScroll);
+    this.syncRail();
+    this.syncNav();
+    this.observeReveals();
+    // Relógio de São Paulo: troca só o texto do próprio nó, sem redesenhar a página a cada segundo
+    this._clock = setInterval(() => {
+      const el = document.getElementById('sp-clock');
+      if (el && el.firstChild) el.firstChild.nodeValue = this.spTime();
+    }, 1000);
+  }
+
+  spTime() {
+    try {
+      return new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(new Date());
+    } catch (err) { return ''; }
+  }
+
+  // Machine: o controle responde de imediato e a lista reaparece em short, sem transição de página
+  setFilter(patch) {
+    this.setState(Object.assign({ updating: true }, patch));
+    // Filtro e busca ficam representados no endereço: #/projects?filter=web&q=react
+    const s = Object.assign({}, this.state || {}, patch);
+    const params = [];
+    if (s.kind) params.push('filter=' + encodeURIComponent(s.kind.toLowerCase()));
+    if (s.q && s.q.trim()) params.push('q=' + encodeURIComponent(s.q.trim()));
+    try { window.history.replaceState(null, '', '#/projects' + (params.length ? '?' + params.join('&') : '')); } catch (err) {}
+    const done = () => this.setState({ updating: false });
+    if (typeof requestAnimationFrame === 'function') requestAnimationFrame(() => requestAnimationFrame(done));
+    else setTimeout(done, 32);
+  }
+
+  componentDidUpdate() {
+    this.syncRail();
+    this.syncNav();
+    this.observeReveals();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._onScroll);
+    if (this._io) this._io.disconnect();
+    clearInterval(this._clock);
+  }
+
+  // Liga as revelações só quando há movimento permitido; sem isso o conteúdo já nasce visível
+  initMotion() {
+    if (this._motionInit || typeof window === 'undefined') return;
+    this._motionInit = true;
+    this._motion = !this.prefersReduced() && 'IntersectionObserver' in window;
+    if (this._motion) document.documentElement.setAttribute('data-motion', 'on');
+  }
+
+  petalSeen() {
+    if (this._petalSeen) return true;
+    try { return window.sessionStorage.getItem('vt-petal') === '1'; } catch (err) { return false; }
+  }
+
+  // Wind e Draft entram quando o elemento chega à tela; Petal passa uma única vez por sessão
+  observeReveals() {
+    if (!this._motion) return;
+    const nodes = document.querySelectorAll('[data-reveal]:not([data-in]):not([data-done])');
+    const isPetal = (el) => el.getAttribute('data-reveal') === 'petal';
+    // Ao voltar de um projeto a lista reaparece já desenhada: a transição de retorno é o único movimento
+    if (this._instantReveal && ((this.state || {}).view || 'home') === 'home') {
+      this._instantReveal = false;
+      nodes.forEach((el) => el.setAttribute(isPetal(el) ? 'data-done' : 'data-in', ''));
+      return;
+    }
+    if (!this._io) {
+      this._io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (!en.isIntersecting) return;
+          const el = en.target;
+          this._io.unobserve(el);
+          if (isPetal(el)) {
+            if (this.petalSeen()) { el.setAttribute('data-done', ''); return; }
+            this._petalSeen = true;
+            try { window.sessionStorage.setItem('vt-petal', '1'); } catch (err) {}
+          }
+          el.setAttribute('data-in', '');
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+    }
+    nodes.forEach((el) => this._io.observe(el));
+  }
+
+  // Faixa da entrada na tela: a prancha do detalhe desenrola sobre ela antes de abrir na altura toda
+  setBand(el) {
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const st = document.documentElement.style;
+    st.setProperty('--vt-top', Math.max(0, Math.round(r.top)) + 'px');
+    st.setProperty('--vt-bottom', Math.max(0, Math.round(window.innerHeight - r.bottom)) + 'px');
+  }
+
+  // Executa setState e garante continuação mesmo se o runtime não chamar o callback
+  commit(patch, after) {
+    let done = false;
+    const finish = () => { if (done) return; done = true; if (after) after(); };
+    this.setState(patch, finish);
+    setTimeout(finish, 60);
+  }
+
+  // open/return: Draft + Flight com índice, título e prancha compartilhados; forward/back: Wind;
+  // fade: movimento reduzido troca as vistas por um cross-fade curto
+  transition(mode, id, update) {
+    const doc = document;
+    const root = doc.documentElement;
+    if (!doc.startViewTransition) { update(); return; }
+    if (this.prefersReduced()) mode = 'fade';
+    const shared = mode === 'open' || mode === 'return';
+    this.commit({ vt: shared ? 'shared' : 'none', vtId: id }, () => {
+      root.setAttribute('data-vt', mode);
+      let t;
+      try { t = doc.startViewTransition(update); } catch (err) { root.removeAttribute('data-vt'); update(); return; }
+      t.finished.finally(() => root.removeAttribute('data-vt'));
+    });
+  }
+
+  // from: de onde o projeto foi aberto (work, archive, capabilities), para o retorno voltar ao mesmo lugar
+  // Rota simulada: home, projects, lab, about, contact e detail são páginas distintas do mesmo protótipo.
+  // opts: mode (transição), patch (estado), anchor (id para rolar), offset, slide (posição do rail), band (id da faixa), focus (id)
+  go(view, opts) {
+    opts = opts || {};
+    const s = this.state || {};
+    const patch = Object.assign({ view: view, menu: false }, opts.patch || {});
+    this.transition(opts.mode || 'forward', opts.id || s.id, () => new Promise((resolve) => {
+      if (opts.mode === 'return') this._instantReveal = true;
+      this.commit(patch, () => {
+        const el = opts.anchor ? document.getElementById(opts.anchor) : null;
+        const top = el ? el.getBoundingClientRect().top + window.scrollY - (opts.offset || 0) : 0;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+        // Na travessia fixada, a posição do projeto é uma posição de scroll: vem depois da âncora
+        if (opts.slide != null) this.railTo(opts.slide, true);
+        if (opts.band) this.setBand(document.getElementById(opts.band));
+        const fid = opts.focus || opts.band || opts.anchor;
+        const f = fid ? document.getElementById(fid) : null;
+        const target = f && (f.matches('a, button, [tabindex]') ? f : (f.querySelector('a, button') || f));
+        if (target && target.focus) target.focus({ preventScroll: true });
+        resolve();
+      });
+    }));
+  }
+
+  // from: de onde o projeto foi aberto (work, archive, capabilities), para o retorno voltar ao mesmo lugar
+  open(id, mode, from) {
+    if (mode === 'open') this.setBand(document.getElementById('entry-' + id));
+    const patch = { id: id };
+    if (from) patch.from = from;
+    this.go('detail', { mode: mode, id: id, patch: patch, focus: 'project-title' });
+  }
+
+  // O retorno compartilhado só existe para quem abriu pela prancha de Selected Work
+  back() {
+    const s = this.state || {};
+    const id = s.id;
+    if (s.from === 'archive') { this.go('projects', { mode: 'back', anchor: 'arow-' + id, offset: 160 }); return; }
+    if (s.from === 'capabilities') { this.go('home', { mode: 'back', anchor: 'capabilities' }); return; }
+    const i = this.projects().findIndex((p) => p.id === id);
+    this.go('home', { mode: 'return', id: id, patch: { lastId: id, slide: i }, slide: i, anchor: 'work', band: 'entry-' + id });
+  }
+
+  // Rail de Selected Work: rolagem horizontal nativa; os botões só pedem a posição
+  // A travessia fixada só vale em janelas largas e altas o bastante e com movimento permitido;
+  // fora disso a faixa é um scroll horizontal nativo (toque, trackpad)
+  pinned() {
+    return !!(window.matchMedia && window.matchMedia('(min-width: 1024px) and (min-height: 760px) and (prefers-reduced-motion: no-preference)').matches);
+  }
+
+  // Travessia horizontal: a posição do scroll vertical dentro da seção define o deslocamento da faixa.
+  // Nenhum evento de wheel é interceptado; a seção ganha a altura extra que o percurso precisa.
+  syncRail() {
+    const sec = document.getElementById('work');
+    const pin = document.getElementById('work-pin');
+    const rail = document.getElementById('rail');
+    if (!sec || !pin || !rail) return;
+    if (!this.pinned()) {
+      if (sec.style.height) { sec.style.height = ''; rail.style.transform = ''; }
+      return;
+    }
+    const max = this.railTravel(rail);
+    const height = (pin.offsetHeight + max) + 'px';
+    if (sec.style.height !== height) sec.style.height = height;
+    const shift = Math.max(0, Math.min(max, -sec.getBoundingClientRect().top));
+    rail.style.transform = 'translate3d(' + (-shift) + 'px, 0, 0)';
+    this.markSlide(rail, shift);
+  }
+
+  // Percurso total da faixa: termina quando o último elemento (a porta do arquivo) chega ao centro da janela,
+  // não quando encosta na borda. O espaço extra é do percurso, não do card.
+  railTravel(rail) {
+    const slides = rail.querySelectorAll('.slide');
+    const last = slides[slides.length - 1];
+    const edge = Math.max(0, rail.scrollWidth - rail.clientWidth);
+    if (!last) return edge;
+    const center = (last.offsetLeft - rail.offsetLeft) + last.offsetWidth / 2 - rail.clientWidth / 2;
+    return Math.max(edge, Math.round(center));
+  }
+
+  // Projeto mais próximo da posição atual: mantém indicadores e a prancha "atual" em sincronia
+  markSlide(rail, shift) {
+    const slides = rail.querySelectorAll('.slide');
+    let best = 0;
+    let dist = Infinity;
+    slides.forEach((el, i) => {
+      const d = Math.abs(el.offsetLeft - slides[0].offsetLeft - shift);
+      if (d < dist) { dist = d; best = i; }
+    });
+    if (((this.state || {}).slide || 0) !== best) this.setState({ slide: best });
+  }
+
+  // Controles auxiliares (setas, índice, teclado, foco): pedem um projeto; quem move é o scroll
+  railTo(i, instant) {
+    const rail = document.getElementById('rail');
+    const sec = document.getElementById('work');
+    if (!rail || !sec) return;
+    const slides = rail.querySelectorAll('.slide');
+    const n = Math.max(0, Math.min(slides.length - 1, i));
+    if (!slides[n]) return;
+    const offset = slides[n].offsetLeft - slides[0].offsetLeft;
+    const behavior = instant || this.prefersReduced() ? 'instant' : 'smooth';
+    if (this.pinned()) {
+      this.syncRail();
+      const max = this.railTravel(rail);
+      const top = sec.getBoundingClientRect().top + window.scrollY + Math.min(offset, max);
+      window.scrollTo({ top: top, behavior: behavior });
+      if (instant) this.syncRail();
+      return;
+    }
+    rail.scrollTo({ left: offset, behavior: behavior });
+  }
+
+  onRail(rail) {
+    if (!this.pinned()) this.markSlide(rail, rail.scrollLeft);
+  }
+
+  videoRef() {
+    if (!this._videoRef) {
+      this._videoRef = (el) => {
+        this.video = el;
+        if (!el) return;
+        el.muted = true;
+        const s = this.state || {};
+        const paused = s.paused != null ? s.paused : this.prefersReduced();
+        if (paused) { el.pause(); return; }
+        const p = el.play();
+        if (p && p.catch) p.catch(() => {});
+      };
+    }
+    return this._videoRef;
+  }
+
+  toggleScene() {
+    const s = this.state || {};
+    const paused = s.paused != null ? s.paused : this.prefersReduced();
+    const v = this.video;
+    if (v) {
+      if (paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+      else v.pause();
+    }
+    this.setState({ paused: !paused });
+  }
+
+  // Selected Work: três projetos reais, nesta ordem. Conteúdo vindo do briefing e dos READMEs dos repositórios
+  // (lidos em 2026-10-01); o que não está confirmado fica marcado, nunca preenchido.
+  projects() {
+    const C = '[CONTENT REQUIRED]';
+    return [
+      {
+        id: 'vetor', num: '01',
+        title: 'Vetor',
+        category: 'Developer tooling',
+        stack: 'TypeScript · Deno · Agent runtimes',
+        stackList: ['TypeScript', 'Deno', 'Agent runtimes', 'Workflow automation', 'GitHub CLI', 'Git worktrees'],
+        tags: ['TypeScript', 'Deno'],
+        cats: ['Selected', 'Open source'],
+        kind: '', // tipo de sistema ainda não confirmado: aparece só em "All"
+        summary: 'A tool for creating and organising workflows for agent runtimes, focused on automation, agent-assisted development and integration with different execution environments.',
+        status: '[STATUS REQUIRED]',
+        evidenceMark: 'Architecture · Code · Decision',
+        fig: 'Fig. 01 — The development cycle Vetor covers, as stated in the repository README.',
+        figAlt: 'Workflow cycle in six steps: ideation, backlog, isolated worktree, autonomous fix loop, ship, guard.',
+        spec: [{ k: 'Role', v: C }, { k: 'Context', v: 'Open source' }, { k: 'Period', v: C }, { k: 'Status', v: '[STATUS REQUIRED]' }],
+        problem: C,
+        context: 'Vetor is a skills plugin that coordinates agents across isolated development flows. It runs natively in one agent runtime, with partial compatibility documented for others.',
+        objective: 'Cover a whole development cycle: ideation, backlog, isolated worktree, autonomous fix, ship and guard.',
+        architecture: 'The repository is organised by role: agents for coordinated dispatch, skills for each step of the workflow, MCP integrations, a command-line interface, hooks and templates. The scripts are TypeScript, run on Deno.',
+        decisions: [
+          { k: 'D1', h: 'Merges are serialised', b: 'Issues are dispatched to agents in parallel; their merges go in one at a time.' },
+          { k: 'D2', h: 'The fix loop is bounded', b: 'The autonomous reproduce, fix, rebuild and test loop stops at five iterations.' },
+          { k: 'D3', h: 'Architecture review stays manual', b: 'The architecture-review skill is always run by hand, never on a schedule.' }
+        ],
+        implementation: 'Six skills carry the cycle: spec, issue-coordinator, fix-loop-agent, worktree-ship, guardian and architecture-review.',
+        results: [{ t: '[RESULT NOT MEASURED]', ref: '' }],
+        limitations: [
+          { t: 'Headless issue coordination needs autonomous permissions to be configured first.', ref: 'L-01.1' },
+          { t: 'Compatibility with other agent runtimes is partial.', ref: 'L-01.1' }
+        ],
+        records: [
+          { kind: 'Architecture', ref: 'Fig. 01', title: 'Workflow cycle', desc: 'The six steps the plugin covers, and the skills that carry them.' },
+          { kind: 'Code', ref: 'E-01.1', title: 'Skills, agents, hooks and scripts', desc: 'The published repository is the record: TypeScript on Deno, organised by role.', sourceLabel: 'View repository', sourceValue: 'github.com/Tavaressan/Vetor' },
+          { kind: 'Decision', ref: 'D2', title: 'The fix loop is bounded', desc: 'Five iterations at most, stated in the skill itself.', sourceLabel: 'Source', sourceValue: 'README' },
+          { kind: 'Limitation', ref: 'L-01.1', title: 'Known limits', desc: 'Headless coordination depends on permission setup; other runtimes are only partly supported.', sourceLabel: 'Source', sourceValue: 'README' }
+        ],
+        links: [{ label: 'View repository', value: 'github.com/Tavaressan/Vetor', href: 'https://github.com/Tavaressan/Vetor' }]
+      },
+      {
+        id: 'delphos', num: '02',
+        title: 'Delphos',
+        category: 'AI / distributed systems',
+        stack: 'Java · Spring Boot · Rust · Python · RabbitMQ · PostgreSQL · pgvector · Next.js',
+        stackList: ['Java', 'Spring Boot', 'Rust', 'Python', 'CrewAI', 'RabbitMQ', 'PostgreSQL', 'pgvector', 'Next.js', 'Vertex AI / Gemini', 'MinIO / S3', 'Docker'],
+        tags: ['Java', 'Spring Boot', 'Rust', 'Python', 'CrewAI', 'RabbitMQ', 'PostgreSQL', 'pgvector', 'Next.js', 'Vertex AI', 'MinIO', 'Docker'],
+        cats: ['Selected', 'AI', 'Full-stack'],
+        kind: 'AI',
+        summary: 'A distributed architecture that combines application processing, RAG, messaging and specialised workers, connecting Java, Rust and Python components in a service-oriented infrastructure.',
+        status: '[STATUS REQUIRED]',
+        evidenceMark: 'Architecture · Code · Decision',
+        fig: 'Fig. 02 — Delphos services, as described in the repository README. Where the Rust services attach: [CONTENT REQUIRED].',
+        figAlt: 'Delphos services: a Next.js frontend calls a Java and Spring Boot core, which enqueues jobs on RabbitMQ for ingestion, RAG and agent-crew workers; the core stores embeddings in PostgreSQL with pgvector; Rust services handle parallel data processing.',
+        spec: [{ k: 'Role', v: C }, { k: 'Context', v: C }, { k: 'Period', v: C }, { k: 'Status', v: '[STATUS REQUIRED]' }],
+        problem: C,
+        context: 'Delphos is a modular platform for orchestrating AI agents with retrieval-augmented generation.',
+        objective: C,
+        architecture: 'A Next.js frontend talks to a Java and Spring Boot core. The core enqueues jobs on RabbitMQ, and specialised workers for ingestion, RAG and agent crews process them asynchronously. Rust services handle parallel data processing, a Python worker runs the agent crews with CrewAI, and embeddings are stored in PostgreSQL with pgvector. Documents go to MinIO or S3 object storage, generation runs on Vertex AI with Gemini, and the services are packaged with Docker.',
+        decisions: [
+          { k: 'D1', h: 'Low coupling between modules', b: 'Modules follow a clean architecture so that a later move to separate services stays open.' },
+          { k: 'D2', h: 'Work leaves the core through a queue', b: 'The core enqueues jobs on RabbitMQ; workers process them asynchronously.' },
+          { k: 'D3', h: 'More than one model provider', b: 'Vertex AI with Gemini is the provider, with a hosted and a local fallback.' }
+        ],
+        implementation: C,
+        results: [{ t: '[RESULT NOT MEASURED]', ref: '' }],
+        limitations: [{ t: C, ref: '' }],
+        records: [
+          { kind: 'Architecture', ref: 'Fig. 02', title: 'Services and the queue between them', desc: 'Frontend, core, queue, workers and vector storage, drawn from the README.' },
+          { kind: 'Decision', ref: 'D1', title: 'Low coupling between modules', desc: 'The repository keeps architectural decision records.', sourceLabel: 'Source', sourceValue: 'ADRs in the repository' },
+          { kind: 'Code', ref: 'E-02.1', title: 'Java, Rust and Python in one repository', desc: 'The published repository is the record of how the three runtimes are joined.', sourceLabel: 'View repository', sourceValue: 'github.com/Tavaressan/delphos' },
+          { kind: 'Deployment', ref: 'E-02.2', title: C, desc: 'The repository carries deployment documentation; where it runs has not been stated.', sourceLabel: 'View deployment', sourceValue: '[LINK REQUIRED]' }
+        ],
+        links: [{ label: 'View repository', value: 'github.com/Tavaressan/delphos', href: 'https://github.com/Tavaressan/delphos' }]
+      },
+      {
+        id: 'cafey', num: '03',
+        title: 'Cafey',
+        category: 'IoT / edge systems',
+        stack: 'ESP32 · MQTT · AWS IoT Core · Kotlin Multiplatform · Spring Boot · PostgreSQL · KiCad · FreeCAD',
+        stackList: ['KiCad', 'FreeCAD', 'ESP32', 'Firmware', 'MQTT', 'AWS IoT Core', 'Kotlin', 'Spring Boot', 'PostgreSQL', 'Kotlin Multiplatform'],
+        tags: ['ESP32', 'MQTT', 'AWS IoT Core', 'Kotlin', 'Kotlin Multiplatform', 'Spring Boot', 'PostgreSQL', 'KiCad', 'FreeCAD'],
+        cats: ['Selected', 'Academic', 'IoT', 'Full-stack'],
+        kind: 'IoT',
+        summary: 'A physical IoT system, end to end: mechanical design, electronics, firmware, cloud, backend and applications for a product designed to be built.',
+        status: 'Phase 1 · schematic validated',
+        evidenceMark: 'Architecture · Hardware · Mechanical design',
+        fig: 'Fig. 03 — Cafey system outline.',
+        figAlt: 'Cafey outline: an ESP32 module, with electronics designed in KiCad and a structure modelled in FreeCAD, switches a coffee maker through a relay and publishes over MQTT to AWS IoT Core, which feeds a Kotlin and Spring Boot API backed by PostgreSQL; Kotlin Multiplatform clients reach the module.',
+        spec: [{ k: 'Role', v: C }, { k: 'Context', v: 'Sixth-semester integrator project' }, { k: 'Period', v: C }, { k: 'Status', v: 'Phase 1 · schematic validated' }],
+        problem: 'Make a coffee maker with a mechanical switch a connected appliance, without opening it.',
+        context: 'Cafey is an external IoT module that turns a mechanical-switch coffee maker into a connected appliance with no internal modification. It is also the sixth-semester integrator project.',
+        objective: 'A physical product designed for fabrication, connecting mechanical engineering, electronics, firmware, software and cloud.',
+        architecture: 'The work runs in four layers. Physical hardware: the mechanical structure is modelled in FreeCAD and the circuits are designed in KiCad. Edge: an ESP32, its firmware and MQTT. Cloud: AWS IoT Core, a backend and PostgreSQL. Applications: Kotlin Multiplatform clients over a Kotlin and Spring Boot API. In detail, an ESP32 drives a relay that cuts mains power to the coffee maker. The firmware, C++ on ESP-IDF and structured as active objects over FreeRTOS, speaks MQTT over TLS with X.509 certificates to AWS IoT Core. A Kotlin and Spring Boot backend with PostgreSQL consumes MQTT and exposes a REST API for devices, commands and scheduling. Kotlin Multiplatform clients cover web, mobile and desktop.',
+        decisions: [
+          { k: 'D1', h: 'A relay outside, nothing inside', b: 'Control is a relay on the mains line, so the coffee maker is never opened or modified.' },
+          { k: 'D2', h: 'AWS IoT Core as the broker', b: 'MQTT runs over TLS with X.509 certificates against a managed broker.' },
+          { k: 'D3', h: 'Mains and low voltage on opposite sides', b: 'The housing keeps the mains section and the low-voltage section apart, as electrical safety requires.' }
+        ],
+        implementation: 'Phase 1, the electrical schematic, is validated. Firmware, backend and basic mobile operation belong to Phase 2.',
+        results: [
+          { t: 'Electrical schematic validated.', ref: 'E-03.1' },
+          { t: '[RESULT NOT MEASURED]', ref: '' }
+        ],
+        limitations: [
+          { t: 'Component procurement is blocking board validation, mechanical design and electrical testing.', ref: 'L-03.1' },
+          { t: 'The hardware handles mains voltage: assembly needs validation by an electrician before first use under load.', ref: 'L-03.2' }
+        ],
+        records: [
+          { kind: 'Architecture', ref: 'Fig. 03', title: 'Architecture · hardware, edge, cloud and applications', desc: 'How the physical module, the edge device, the cloud and the applications relate, in one drawing.' },
+          { kind: 'Code', ref: 'E-03.1', title: 'Hardware · electronics in KiCad', desc: 'The circuit around the ESP32: the validated electrical schematic, kept in the repository with the board and component libraries.', sourceLabel: 'View repository', sourceValue: 'github.com/Tavaressan/cafey' },
+          { kind: 'Code', ref: 'E-03.2', title: 'Mechanical design · structure in FreeCAD', desc: 'The physical structure of the module is modelled in FreeCAD and is meant to be produced. Visual record: [CONTENT REQUIRED].', sourceLabel: 'Model files', sourceValue: '[LINK REQUIRED]' },
+          { kind: 'Code', ref: 'E-03.3', title: 'Firmware · embedded software on the ESP32', desc: 'C++ on ESP-IDF, structured as active objects over FreeRTOS. Implementation record: [CONTENT REQUIRED].' },
+          { kind: 'Decision', ref: 'D2', title: 'Communication · MQTT', desc: 'The module speaks MQTT over TLS with X.509 certificates.', sourceLabel: 'Source', sourceValue: 'README' },
+          { kind: 'Deployment', ref: 'E-03.4', title: 'Cloud · AWS IoT Core', desc: 'The managed broker between the module and the backend. Deployment record: [CONTENT REQUIRED].', sourceLabel: 'View deployment', sourceValue: '[LINK REQUIRED]' },
+          { kind: 'Code', ref: 'E-03.5', title: 'Backend · Kotlin, Spring Boot and PostgreSQL', desc: 'A REST API for devices, commands and scheduling, consuming MQTT. Implementation record: [CONTENT REQUIRED].' },
+          { kind: 'Code', ref: 'E-03.6', title: 'Application · Kotlin Multiplatform', desc: 'Clients for web, mobile and desktop. Implementation record: [CONTENT REQUIRED].' },
+          { kind: 'Decision', ref: 'D1', title: 'A relay outside, nothing inside', desc: 'The module is external; the appliance stays as it was built.', sourceLabel: 'Source', sourceValue: 'README' },
+          { kind: 'Limitation', ref: 'L-03.1', title: 'Blocked on components', desc: 'Board validation, mechanical design and electrical tests wait for parts.' },
+          { kind: 'Limitation', ref: 'L-03.2', title: 'Mains voltage', desc: 'The module switches 127 V; it must be validated by an electrician before use under load.' }
+        ],
+        links: [{ label: 'View repository', value: 'github.com/Tavaressan/cafey', href: 'https://github.com/Tavaressan/cafey' }]
+      }
+    ];
+  }
+
+  // Só no arquivo: projetos reais sem página de detalhe; o link leva ao repositório.
+  // UP Barber é um projeto único com três repositórios de referência.
+  archiveOnly() {
+    const C = '[CONTENT REQUIRED]';
+    const pro = [
+      { id: 'esp32app', num: '04', kind: 'IoT', title: 'ESP32 IoT App', category: 'IoT', stack: 'ESP32 · ESP-IDF · C · MQTT · AWS IoT Core', tags: ['ESP32', 'MQTT', 'AWS IoT Core'], cats: ['IoT'], href: 'https://github.com/Tavaressan/esp32-iot-app' },
+      { id: 'arara', num: '05', kind: 'Mobile', title: 'Arara Carioca', category: 'Mobile', stack: 'React Native', tags: ['React Native'], cats: ['Mobile'], href: 'https://github.com/Tavaressan/arara-carioca-react-native' },
+    ];
+    // Trilha acadêmica declarada do 1º ao 5º semestre (o 6º é o Cafey, já em Selected Work)
+    // e apresentada do mais recente para o mais antigo
+    const academic = [
+      { id: 'rosary', num: '06', title: 'Rosary Store', category: 'Academic · 1st semester', stack: C, tags: [], cats: ['Academic'], href: 'https://github.com/Tavaressan/rosary-store/tree/main' },
+      { id: 'fluxora', num: '07', kind: 'Web', title: 'Fluxora Maternal', category: 'Academic · 2nd semester', stack: 'React · PHP · SQLite', tags: ['React', 'PHP'], cats: ['Academic', 'Full-stack'], href: 'https://github.com/Tavaressan/fluxora-maternal' },
+      { id: 'gtsolar', num: '08', title: 'GT Solar', category: 'Academic · 3rd semester', stack: 'Java · Spring Boot', tags: ['Java', 'Spring Boot'], cats: ['Academic'], href: 'https://github.com/Tavaressan/GT-Solar-Backend' },
+      { id: 'kazu', num: '09', kind: 'Web', title: 'Kazu Tattoo', category: 'Academic · 4th semester', stack: 'Java · Spring Boot · Vue · MySQL · MongoDB', tags: ['Java', 'Spring Boot', 'Vue'], cats: ['Academic', 'Full-stack'], href: 'https://github.com/Tavaressan/Project-LDW' },
+      { id: 'upbarber', num: '10', title: 'UP Barber', category: 'Academic · 5th semester', stack: '', tags: [], cats: ['Academic', 'Full-stack'], refs: [
+        { label: 'Frontend', href: 'https://github.com/Tavaressan/PI-5SM-FRONT' },
+        { label: 'Backend', href: 'https://github.com/RafaelBorges22/PI-5SM-BACK' },
+        { label: 'Dashboard', href: 'https://github.com/Tavaressan/PI-5SM-DASHBOARD' }
+      ] }
+    ];
+    return pro.concat(academic.reverse().map((p, i) => Object.assign({}, p, { num: ('0' + (6 + i)).slice(-2) })));
+  }
+
+  // Uma linha só existe com projeto e evidência reais por trás
+  caps() {
+    return [
+      { n: '01', title: 'Developer tooling and agent workflows', stack: 'TypeScript · Deno · agent runtimes', projects: '01', evidence: 'Fig. 01 · E-01.1', ids: ['vetor'], details: 'Skills that carry a development cycle from specification to merge, coordinating agents across isolated worktrees. Vetor is the record: its workflow cycle (Fig. 01) and its repository (E-01.1).' },
+      { n: '02', title: 'Distributed systems and AI', stack: 'Java · Spring Boot · Rust · Python · CrewAI · RabbitMQ · pgvector', projects: '02', evidence: 'Fig. 02 · D2', ids: ['delphos'], details: 'Services in different runtimes joined by a queue: a Java core, Rust processing, Python agent workers on CrewAI, and retrieval over vectors stored in PostgreSQL. Delphos shows the layout (Fig. 02) and the queue decision (D2).' },
+      { n: '03', title: 'Edge and IoT', stack: 'ESP32 · MQTT · AWS IoT Core · KiCad · FreeCAD', projects: '03', evidence: 'Fig. 03 · E-03.1 · E-03.2', ids: ['cafey'], details: 'A physical product as one system: electronics designed in KiCad, a structure modelled in FreeCAD, an ESP32 with its firmware, and MQTT to a managed broker. Cafey carries the architecture (Fig. 03), the electronics (E-03.1) and the mechanical design (E-03.2).' },
+      { n: '04', title: 'Full-stack development', stack: 'Spring Boot · Kotlin · Next.js · PostgreSQL', projects: '02 · 03', evidence: 'Fig. 02 · Fig. 03', ids: ['delphos', 'cafey'], details: 'The backend and the interface on top of it: a Spring Boot core with a Next.js frontend in Delphos; a Kotlin API with multiplatform clients in Cafey.' }
+    ];
+  }
+
+  // Cada item responde o que é, por que é usado e onde; o que não foi dito fica marcado
+  bench() {
+    const C = '[CONTENT REQUIRED]';
+    const S = '[STATUS REQUIRED]';
+    return [
+      { cat: 'Software', items: [
+        { name: 'TypeScript on Deno', what: 'Language and runtime', why: C, where: 'The scripts of Vetor.', used: 'Project 01', status: S },
+        { name: 'Spring Boot', what: 'Backend framework, in Java and in Kotlin', why: C, where: 'The Delphos core and the Cafey API.', used: 'Projects 02 · 03', status: S },
+        { name: 'Next.js', what: 'Web frontend framework', why: C, where: 'The Delphos frontend.', used: 'Project 02', status: S }
+      ] },
+      { cat: 'Systems', items: [
+        { name: 'RabbitMQ', what: 'Message broker', why: 'Jobs leave the core through a queue and workers process them asynchronously.', where: 'Between the Delphos core and its workers.', used: 'Project 02', status: S },
+        { name: 'PostgreSQL and pgvector', what: 'Relational database with vector storage', why: C, where: 'Embeddings in Delphos; application data in Cafey.', used: 'Projects 02 · 03', status: S },
+        { name: 'MQTT and AWS IoT Core', what: 'Device messaging and a managed broker', why: C, where: 'Between the Cafey module and the cloud, over TLS with X.509 certificates.', used: 'Project 03', status: S }
+      ] },
+      { cat: 'Edge', items: [
+        { name: 'ESP32', what: 'Microcontroller', why: C, where: 'The Cafey module, with firmware in C++ on ESP-IDF; also the ESP32 IoT App in the archive.', used: 'Project 03', status: S }
+      ] },
+      { cat: 'AI', items: [
+        { name: 'Agent runtimes', what: 'Environments that execute coding agents', why: C, where: 'Vetor runs natively in one runtime, with partial compatibility in others.', used: 'Project 01', status: S },
+        { name: 'Retrieval-augmented generation', what: 'Retrieval over stored embeddings before generation', why: C, where: 'The RAG workers of Delphos.', used: 'Project 02', status: S }
+      ] },
+      { cat: 'Hardware', items: [
+        { name: 'KiCad', what: 'Electronics design tool', why: C, where: 'The schematic, board and component libraries of Cafey.', used: 'Project 03', status: S },
+        { name: 'FreeCAD', what: 'Mechanical modelling tool', why: C, where: 'The physical structure of the Cafey module, modelled for production.', used: 'Project 03', status: S }
+      ] }
+    ];
+  }
+
+  // /about: experiência profissional e trilha acadêmica, em ordem cronológica
+  track() {
+    const C = '[CONTENT REQUIRED]';
+    const work = [
+      { period: C, org: 'Alfabra Elevadores', role: C, systems: 'IoT and cloud systems', tech: '', contribution: C }
+    ];
+    // Declarada do 1º ao 6º semestre; apresentada do 06 para o 01, com o número de cada semestre preservado
+    const academic = [
+      { period: '1st semester', org: 'Rosary Store', role: 'Fatec Itaquera · academic project', systems: C, tech: '', contribution: C },
+      { period: '2nd semester', org: 'Fluxora Maternal', role: 'Fatec Itaquera · academic project', systems: 'Web application for nutritionist services', tech: 'React · PHP · SQLite', contribution: C },
+      { period: '3rd semester', org: 'GT Solar', role: 'Fatec Itaquera · academic project', systems: 'Backend for solar energy management', tech: 'Java · Spring Boot', contribution: C },
+      { period: '4th semester', org: 'Kazu Tattoo', role: 'Fatec Itaquera · academic project', systems: 'Web system for a tattoo studio', tech: 'Java · Spring Boot · Vue', contribution: C },
+      { period: '5th semester', org: 'UP Barber', role: 'Fatec Itaquera · academic project', systems: 'Frontend · backend · dashboard', tech: '', contribution: 'One project in three parts, to be consolidated in a single repository.' },
+      { period: '6th semester', org: 'Cafey', role: 'Fatec Itaquera · integrator project', systems: 'Physical IoT system, end to end', tech: 'KiCad · FreeCAD · ESP32 · MQTT · AWS IoT Core', contribution: 'A physical product designed for fabrication: mechanical design, electronics, firmware, cloud and applications.' }
+    ];
+    return work.concat(academic.map((t, i) => Object.assign({}, t, { period: '0' + (i + 1) + ' · ' + t.period })).reverse());
+  }
+
+  // Home: só o resumo que aponta para /about
+  teaser() {
+    return [
+      { org: 'Alfabra Elevadores', systems: 'IoT and cloud systems' },
+      { org: 'Fatec Itaquera', systems: 'Academic projects · semesters 01 · 02 · 03 · 04 · 05 · 06' }
+    ];
+  }
+
+  renderVals() {
+    this.initMotion();
+    const s = this.state || {};
+    const view = s.view || 'home';
+    const detail = view === 'detail';
+    const paused = s.paused != null ? s.paused : this.prefersReduced();
+    const shared = s.vt === 'shared';
+    const projects = this.projects().map((p, i) => {
+      const on = shared && s.vtId === p.id;
+      return Object.assign({}, p, {
+        isA: p.id === 'vetor', isB: p.id === 'delphos', isC: p.id === 'cafey',
+        vtIndex: on ? 'vt-index' : 'none',
+        vtTitle: on ? 'vt-title' : 'none',
+        vtSheet: on ? 'vt-sheet' : 'none',
+        entryClass: 'entry' + (on || s.lastId === p.id ? ' is-open' : '') + ((s.slide || 0) === i ? ' is-current' : ''),
+        focusSlide: () => { if (this.pinned() && (s.slide || 0) !== i) this.railTo(i); },
+        open: (e) => { if (e && e.preventDefault) e.preventDefault(); this.open(p.id, 'open', 'work'); },
+        records: p.records.map((r) => Object.assign({}, r, {
+          isArchitecture: r.kind === 'Architecture', isCode: r.kind === 'Code', isRuntime: r.kind === 'Runtime',
+          isDecision: r.kind === 'Decision', isMeasurement: r.kind === 'Measurement', isDeployment: r.kind === 'Deployment',
+          isLimitation: r.kind === 'Limitation',
+          hasStatus: !!r.status, markClass: 'mark is-' + String(r.status || '').toLowerCase(),
+          hasMeasure: r.kind === 'Measurement', hasSource: !!r.sourceLabel
+        }))
+      });
+    });
+    const cur = projects.find((p) => p.id === s.id) || projects[0];
+    const nextP = projects[(projects.indexOf(cur) + 1) % projects.length];
+    // Navegação: cada link é um destino; sair para a home é "voltar", o resto é "avançar"
+    const route = (to) => (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      if (to === view) { if (s.menu) this.setState({ menu: false }); window.scrollTo({ top: 0, behavior: this.prefersReduced() ? 'instant' : 'smooth' }); return; }
+      this.go(to, { mode: to === 'home' ? 'back' : 'forward', focus: 'page-title' });
+    };
+    const link = (to) => 'nav-link' + (view === to || (to === 'projects' && detail) ? ' is-current' : '');
+    const cur_ = (to) => (view === to || (to === 'projects' && detail) ? 'page' : 'false');
+    const openFrom = (id, from) => (e) => { if (e && e.preventDefault) e.preventDefault(); this.open(id, 'forward', from); };
+
+    const capOpen = s.capOpen || null;
+    const caps = this.caps().map((c) => ({
+      n: c.n, title: c.title, stack: c.stack, projects: c.projects, evidence: c.evidence, details: c.details,
+      expanded: capOpen === c.n ? 'true' : 'false',
+      panelClass: 'm-disclosure' + (capOpen === c.n ? ' is-open' : ''),
+      toggle: () => this.setState({ capOpen: capOpen === c.n ? null : c.n }),
+      links: c.ids.map((id) => { const p = projects.find((x) => x.id === id); return { id: id, num: p.num, open: openFrom(id, 'capabilities') }; })
+    }));
+
+    // Arquivo: os três selecionados abrem o detalhe; os demais levam ao repositório.
+    // Filtro = que tipo de sistema é (um por vez). Busca = qualquer metadado do projeto. Os dois combinam.
+    const kind = s.kind || null;
+    const q = s.q || '';
+    const needle = q.trim().toLowerCase();
+    const hasFilters = !!(kind || needle);
+    const all = projects.concat(this.archiveOnly());
+    const kindFilters = [null, 'Web', 'Mobile', 'IoT', 'AI'].map((k) => ({
+      label: k || 'All', pressed: kind === k ? 'true' : 'false',
+      pick: () => this.setFilter({ kind: k })
+    }));
+    const haystack = (p) => [p.title, p.summary || '', p.stack, p.category, p.kind || '', p.cats.join(' '), p.tags.join(' '),
+      (p.stackList || []).join(' '), (p.refs || []).map((r) => r.label).join(' ')].join(' ').toLowerCase();
+    const matched = all.filter((p) => (!kind || p.kind === kind) && (!needle || haystack(p).indexOf(needle) !== -1));
+    const archiveRows = matched.map((p) => {
+      const selected = p.cats.indexOf('Selected') !== -1;
+      return {
+        id: p.id, num: p.num, title: p.title, category: p.category, stack: p.stack, state: p.status || '[STATUS REQUIRED]',
+        isDetail: selected, isExt: !selected && !!p.href, isMulti: !!p.refs, href: p.href || '#/projects', refs: p.refs || [],
+        open: selected ? openFrom(p.id, 'archive') : null
+      };
+    });
+    const count = archiveRows.length;
+    const slide = s.slide || 0;
+
+    return {
+      caps: caps,
+      bench: this.bench(),
+      track: this.track(),
+      teaser: this.teaser(),
+      kindFilters: kindFilters,
+      q: q,
+      onSearch: (e) => this.setFilter({ q: e && e.target ? e.target.value : '' }),
+      hasFilters: hasFilters,
+      clearFilters: () => this.setFilter({ kind: null, q: '' }),
+      archiveRows: archiveRows,
+      archiveCount: (count < 10 ? '0' + count : '' + count) + (count === 1 ? ' entry' : ' entries') + (hasFilters ? ' match' : ''),
+      noResults: count === 0,
+      resultsClass: 'm-results' + (s.updating ? ' is-updating' : ''),
+      clock: this.spTime(),
+      navListClass: 'nav-list' + (s.menu ? ' is-open' : ''),
+      menuExpanded: s.menu ? 'true' : 'false',
+      toggleMenu: () => this.setState({ menu: !s.menu }),
+      navKey: (e) => { if (e && e.key === 'Escape' && s.menu) this.setState({ menu: false }); },
+      themeClass: 'vt',
+      isHome: view === 'home',
+      isProjects: view === 'projects',
+      isLab: view === 'lab',
+      isAbout: view === 'about',
+      isContact: view === 'contact',
+      isDetail: detail,
+      showFooter: !detail,
+      navClass: 'nav env-' + (detail ? 'night' : (s.navEnv || 'night')),
+      workLinkClass: link('projects'), workCurrent: cur_('projects'),
+      labLinkClass: link('lab'), labCurrent: cur_('lab'),
+      aboutLinkClass: link('about'), aboutCurrent: cur_('about'),
+      contactLinkClass: link('contact'), contactCurrent: cur_('contact'),
+      // Índice informativo: só os três projetos contam; a porta para o arquivo não é um "04"
+      railIndex: '0' + (Math.min(slide, projects.length - 1) + 1),
+      railIndexLabel: 'Project ' + (Math.min(slide, projects.length - 1) + 1) + ' of 3',
+      focusExit: () => { if (this.pinned() && slide !== projects.length) this.railTo(projects.length); },
+      onRail: (e) => { if (e && e.currentTarget) this.onRail(e.currentTarget); },
+      workKey: (e) => {
+        if (!e || (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft')) return;
+        e.preventDefault();
+        this.railTo(slide + (e.key === 'ArrowRight' ? 1 : -1));
+      },
+      projects: projects,
+      cur: cur,
+      next: {
+        id: nextP.id, num: nextP.num, title: nextP.title,
+        open: openFrom(nextP.id, null)
+      },
+      dVtIndex: shared ? 'vt-index' : 'none',
+      dVtTitle: shared ? 'vt-title' : 'none',
+      dVtSheet: shared ? 'vt-sheet' : 'none',
+      paused: paused,
+      playing: !paused,
+      pausedAria: paused ? 'true' : 'false',
+      sceneLabel: paused ? 'Play scene' : 'Pause scene',
+      setVideo: this.videoRef(),
+      toggleScene: () => this.toggleScene(),
+      goTop: route('home'),
+      goWork: route('projects'),
+      goLab: route('lab'),
+      goAbout: route('about'),
+      goContact: route('contact'),
+      backToWork: (e) => { if (e && e.preventDefault) e.preventDefault(); this.back(); }
+    };
+  }
+}
+</script>
+</body>
+</html>
