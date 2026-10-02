@@ -10,9 +10,11 @@ import { ProjectFigure } from "../project-entry/project-figure";
 import { Arrow } from "../typography/icons";
 import "./selected-work.css";
 
-// A travessia fixada só vale em janelas largas e altas o bastante e com movimento permitido;
-// fora disso a faixa é um scroll horizontal nativo (toque, trackpad, teclado)
-const PINNED = "(min-width: 1024px) and (min-height: 760px) and (prefers-reduced-motion: no-preference)";
+// A travessia fixada só vale com movimento permitido e janela alta o bastante para o conteúdo
+// (mesma media query de selected-work.css); fora disso a faixa é um scroll horizontal nativo
+const PINNED =
+  "(min-width: 1280px) and (min-height: 640px) and (prefers-reduced-motion: no-preference), " +
+  "(min-width: 1024px) and (min-height: 680px) and (prefers-reduced-motion: no-preference)";
 const TOTAL = selectedProjects.length;
 
 /** Percurso total da faixa: termina quando a porta do arquivo chega ao centro da janela, não à borda */
